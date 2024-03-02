@@ -6,6 +6,7 @@ namespace App\Providers;
 
 use App\Models\Task;
 use App\MoonShine\Resources\TaskResource;
+use App\MoonShine\Resources\WorkObjectResource;
 use MoonShine\Providers\MoonShineApplicationServiceProvider;
 use MoonShine\MoonShine;
 use MoonShine\Menu\MenuGroup;
@@ -28,9 +29,11 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
     protected function menu(): array
     {
         return [
+            MenuItem::make('WorkObject', new WorkObjectResource())
+                ->icon('heroicons.building-office-2'),
             MenuItem::make('Task', new TaskResource())
                 ->icon('heroicons.table-cells')
-                ->badge(fn() => Task::query()->count())
+                ->badge(fn() => (new TaskResource())->query()->count())
                 ->translatable('moonshine::task'),
             MenuGroup::make(static fn() => __('moonshine::ui.resource.system'), [
                MenuItem::make(
@@ -40,8 +43,8 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
                MenuItem::make(
                    static fn() => __('moonshine::ui.resource.role_title'),
                    new MoonShineUserRoleResource()
-               ),
-            ]),
+               ) ,
+            ])->canSee(fn() => auth()->user()->moonshine_user_role_id === 1),
 
             // MenuItem::make('Documentation', 'https://moonshine-laravel.com')
             //    ->badge(fn() => 'Check'),

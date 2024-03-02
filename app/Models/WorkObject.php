@@ -5,20 +5,22 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use MoonShine\Models\MoonshineUser;
 
-class Task extends Model
+class WorkObject extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'date_created',
         'name',
+        'address',
+        'client',
+        'date_created',
+        'deadline',
         'creator',
-        'performer',
-        'description',
         'status',
-        'deadline'
+        'description'
     ];
 
     public function user(): BelongsTo
@@ -26,13 +28,11 @@ class Task extends Model
         return $this->belongsTo(MoonshineUser::class, 'creator', 'id');
     }
 
-    public function performerUser(): BelongsTo
+    public function tasks(): HasMany
     {
-        return $this->belongsTo(MoonshineUser::class, 'performer', 'id');
+        return $this->hasMany(Task::class);
     }
 
-    public function workObject(): BelongsTo
-    {
-        return $this->belongsTo(WorkObject::class);
-    }
+
+
 }

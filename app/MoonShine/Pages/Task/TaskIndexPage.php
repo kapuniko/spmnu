@@ -7,6 +7,7 @@ namespace App\MoonShine\Pages\Task;
 use MoonShine\Fields\Date;
 use MoonShine\Fields\Image;
 use MoonShine\Fields\Preview;
+use MoonShine\Fields\Relationships\BelongsToMany;
 use MoonShine\Fields\Text;
 use MoonShine\Pages\Crud\IndexPage;
 
@@ -20,8 +21,9 @@ class TaskIndexPage extends IndexPage
             Text::make('name')->translatable('moonshine::task'),
             Image::make('Creator', 'user.avatar'),
             Image::make('Performer', 'performerUser.avatar'),
+            Date::make('deadline')->format('d M H:i')->sortable()->translatable('moonshine::task'),
             Preview::make('status')->badge('yellow')->sortable()->translatable('moonshine::task'),
-            Date::make('deadline')->format('d M H:i')->sortable()->translatable('moonshine::task')
+
         ];
     }
 

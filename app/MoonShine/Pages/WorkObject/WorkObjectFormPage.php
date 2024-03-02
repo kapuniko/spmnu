@@ -2,23 +2,27 @@
 
 declare(strict_types=1);
 
-namespace App\MoonShine\Pages\Task;
+namespace App\MoonShine\Pages\WorkObject;
 
-use App\MoonShine\Resources\WorkObjectResource;
+use App\Models\Task;
+use MoonShine\Components\TableBuilder;
 use MoonShine\Decorations\Block;
 use MoonShine\Decorations\Column;
+use MoonShine\Decorations\Divider;
 use MoonShine\Decorations\Grid;
+use MoonShine\Decorations\Heading;
 use MoonShine\Decorations\LineBreak;
-use MoonShine\Fields\Hidden;
 use MoonShine\Fields\Date;
-use MoonShine\Fields\Relationships\BelongsTo;
+use MoonShine\Fields\Hidden;
+use MoonShine\Fields\ID;
+use MoonShine\Fields\Image;
+use MoonShine\Fields\Preview;
 use MoonShine\Fields\Text;
 use MoonShine\Fields\TinyMce;
-use MoonShine\Models\MoonshineUser;
 use MoonShine\Pages\Crud\FormPage;
-use MoonShine\Resources\MoonShineUserResource;
+use MoonShine\TypeCasts\ModelCast;
 
-class TaskFormPage extends FormPage
+class WorkObjectFormPage extends FormPage
 {
     public function fields(): array
     {
@@ -34,11 +38,8 @@ class TaskFormPage extends FormPage
                     Block::make([
                         Hidden::make('creator')->fill( auth('moonshine')->id()),
                         Date::make('date_created')->withTime()->default($this->AktauTime())->required(),
-                        BelongsTo::make('performer', 'performerUser', resource: new MoonShineUserResource())
-                            ->withImage('avatar')
-                            ->default(MoonshineUser::find(auth('moonshine')->id())),
-                        BelongsTo::make('workObject', 'workObject', 'name', resource: new WorkObjectResource())
-                            ->nullable()
+                        Text::make('client'),
+                        Text::make('address')
                     ]),
                     LineBreak::make(),
                     Block::make([
@@ -60,7 +61,30 @@ class TaskFormPage extends FormPage
     protected function mainLayer(): array
     {
         return [
-            ...parent::mainLayer()
+            ...parent::mainLayer(),
+            LineBreak::make(),
+            Divider::make('Задачи по объекту')
+                ->centered(),
+            Block::make([
+                TableBuilder::make(items: Task::where('work_object_id', $this->getResource()->getItemID())->get())
+                    ->fields([
+                        Date::make('date_created')->format('d M H:i')
+                            ->sortable()
+                            ->translatable('moonshine::task'),
+                        Text::make('name')->translatable('moonshine::task'),
+                        Image::make('Creator', 'user.avatar'),
+                        Image::make('Performer', 'performerUser.avatar'),
+                        Date::make('deadline')
+                            ->format('d M H:i')
+                            ->sortable()
+                            ->translatable('moonshine::task'),
+                        Preview::make('status')->badge('yellow')
+                            ->sortable()
+                            ->translatable('moonshine::task'),
+                        ])
+                    ->cast(ModelCast::make(Task::class))
+                    ->withNotFound()
+            ])
         ];
     }
 
