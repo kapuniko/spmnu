@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->text('name')->nullable();
             $table->text('address')->nullable();
-            $table->text('client')->nullable();
+            $table->text('contragent_id')->nullable();
             $table->timestamp('date_created')->nullable();
             $table->dateTime('deadline')->nullable();
             $table->bigInteger('creator')->nullable();

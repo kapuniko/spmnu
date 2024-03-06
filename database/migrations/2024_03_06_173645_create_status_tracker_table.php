@@ -11,8 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('stus_tracker', function (Blueprint $table) {
+        Schema::create('status_tracker', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('task_id');
+            $table->text('status');
+            $table->bigInteger('user_id');
+            $table->dateTime('date_time');
             $table->timestamps();
         });
     }
@@ -22,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('stus_tracker');
+        Schema::dropIfExists('status_tracker');
     }
 };
