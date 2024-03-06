@@ -6,6 +6,7 @@ namespace App\MoonShine\Pages\WorkObject;
 
 use App\Models\Task;
 use App\MoonShine\Resources\ContragentResource;
+use App\MoonShine\Resources\TaskResource;
 use MoonShine\Components\TableBuilder;
 use MoonShine\Decorations\Block;
 use MoonShine\Decorations\Column;
@@ -19,6 +20,7 @@ use MoonShine\Fields\ID;
 use MoonShine\Fields\Image;
 use MoonShine\Fields\Preview;
 use MoonShine\Fields\Relationships\BelongsTo;
+use MoonShine\Fields\Relationships\HasMany;
 use MoonShine\Fields\Text;
 use MoonShine\Fields\TinyMce;
 use MoonShine\Pages\Crud\FormPage;
@@ -49,7 +51,7 @@ class WorkObjectFormPage extends FormPage
                         Date::make('deadline')->withTime()->format('d M Y — H:i')
                     ])
                 ])->columnSpan(4)
-            ]),
+            ])
         ];
     }
 
@@ -63,30 +65,7 @@ class WorkObjectFormPage extends FormPage
     protected function mainLayer(): array
     {
         return [
-            ...parent::mainLayer(),
-            LineBreak::make(),
-            Divider::make('Задачи по объекту')
-                ->centered(),
-            Block::make([
-                TableBuilder::make(items: Task::where('work_object_id', $this->getResource()->getItemID())->get())
-                    ->fields([
-                        Date::make('date_created')->format('d M H:i')
-                            ->sortable()
-                            ->translatable('moonshine::task'),
-                        Text::make('name')->translatable('moonshine::task'),
-                        Image::make('Creator', 'user.avatar'),
-                        Image::make('Performer', 'performerUser.avatar'),
-                        Date::make('deadline')
-                            ->format('d M H:i')
-                            ->sortable()
-                            ->translatable('moonshine::task'),
-                        Preview::make('status')->badge('yellow')
-                            ->sortable()
-                            ->translatable('moonshine::task'),
-                        ])
-                    ->cast(ModelCast::make(Task::class))
-                    ->withNotFound()
-            ])
+            ...parent::mainLayer()
         ];
     }
 
