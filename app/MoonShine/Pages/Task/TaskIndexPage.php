@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Pages\Task;
 
+use App\Enums\TaskStatus;
 use MoonShine\Fields\Date;
+use MoonShine\Fields\Enum;
 use MoonShine\Fields\Image;
 use MoonShine\Fields\Preview;
 use MoonShine\Fields\Relationships\BelongsToMany;
@@ -22,7 +24,7 @@ class TaskIndexPage extends IndexPage
             Image::make('Creator', 'user.avatar'),
             Image::make('Performer', 'performerUser.avatar'),
             Date::make('deadline')->format('d M H:i')->sortable()->translatable('moonshine::task'),
-            Preview::make('status')->badge('yellow')->sortable()->translatable('moonshine::task'),
+            Enum::make('status')->attach(TaskStatus::class)->sortable()->translatable('moonshine::task')
 
         ];
     }

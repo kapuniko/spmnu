@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use MoonShine\Models\MoonshineUser;
+use App\Models\Contragent;
 
 class WorkObject extends Model
 {
@@ -15,9 +16,9 @@ class WorkObject extends Model
     protected $fillable = [
         'name',
         'address',
-        'client',
         'date_created',
         'deadline',
+
         'creator',
         'status',
         'description'
@@ -28,6 +29,10 @@ class WorkObject extends Model
         return $this->belongsTo(MoonshineUser::class, 'creator', 'id');
     }
 
+    public function contragent(): BelongsTo
+    {
+        return $this->belongsTo(Contragent::class);
+    }
     public function tasks(): HasMany
     {
         return $this->hasMany(Task::class);

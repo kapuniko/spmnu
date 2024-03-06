@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Pages\Task;
 
+use App\Enums\TaskStatus;
 use App\MoonShine\Resources\WorkObjectResource;
 use MoonShine\Decorations\Block;
 use MoonShine\Decorations\Column;
 use MoonShine\Decorations\Grid;
 use MoonShine\Decorations\LineBreak;
+use MoonShine\Fields\Enum;
 use MoonShine\Fields\Hidden;
 use MoonShine\Fields\Date;
 use MoonShine\Fields\Relationships\BelongsTo;
@@ -42,7 +44,7 @@ class TaskFormPage extends FormPage
                     ]),
                     LineBreak::make(),
                     Block::make([
-                        Text::make('status'),
+                        Enum::make('status')->attach(TaskStatus::class),
                         Date::make('deadline')->withTime()->format('d M Y — H:i')
                     ])
                 ])->columnSpan(4)

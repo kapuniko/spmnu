@@ -38,7 +38,7 @@ final class MoonShineLayout implements MoonShineLayoutContract
                 Footer::make()
                     ->copyright(fn(): string => sprintf(
                         <<<'HTML'
-                            &copy; 2021-%d Made with ❤️ by
+                            &copy; 2023-%d Made with ❤️ by
                             <a href="https://www.instagram.com/kapu.letters/"
                                 class="font-semibold text-primary hover:text-secondary"
                                 target="_blank"

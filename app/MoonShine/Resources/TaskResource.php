@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Resources;
 
+use App\Enums\TaskStatus;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Task;
@@ -11,9 +12,10 @@ use App\MoonShine\Pages\Task\TaskIndexPage;
 use App\MoonShine\Pages\Task\TaskFormPage;
 use App\MoonShine\Pages\Task\TaskDetailPage;
 use MoonShine\Fields\DateRange;
-use MoonShine\Fields\Text;
+use MoonShine\Fields\Enum;
 use MoonShine\Handlers\ExportHandler;
 use MoonShine\Handlers\ImportHandler;
+use MoonShine\QueryTags\QueryTag;
 use MoonShine\Resources\ModelResource;
 
 /**
@@ -50,7 +52,7 @@ class TaskResource extends ModelResource
     public function filters(): array
     {
         return[
-            Text::make('status'),
+            Enum::make('status')->attach(TaskStatus::class),
             DateRange::make('Дата создания', 'date_created')
         ];
     }
@@ -79,6 +81,39 @@ class TaskResource extends ModelResource
                 $query->where('creator', $userId)
                     ->orWhere('performer', $userId);
             });
+    }
+
+    // счетчик количества задач в меню
+    public function countWorkingItems(): Builder
+    {
+        return $this->query()
+            ->whereIn('status', ['new', 'at work']);
+    }
+
+    public function queryTags(): array
+    {
+        return [
+            QueryTag::make(
+                'is new', // Tag Title
+                fn(Builder $query) => $query->where('status', '=', 'new')
+            ),
+            QueryTag::make(
+                'is at work', // Tag Title
+                fn(Builder $query) => $query->where('status', '=', 'at work')
+            ),
+            QueryTag::make(
+                'is postponed', // Tag Title
+                fn(Builder $query) => $query->where('status', '=', 'postponed')
+            ),
+            QueryTag::make(
+                'is done', // Tag Title
+                fn(Builder $query) => $query->where('status', '=', 'done')
+            ),
+            QueryTag::make(
+                'is canceled', // Tag Title
+                fn(Builder $query) => $query->where('status', '=', 'canceled')
+            ),
+        ];
     }
     public function rules(Model $item): array
     {

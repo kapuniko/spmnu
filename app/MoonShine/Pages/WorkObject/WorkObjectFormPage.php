@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\MoonShine\Pages\WorkObject;
 
 use App\Models\Task;
+use App\MoonShine\Resources\ContragentResource;
 use MoonShine\Components\TableBuilder;
 use MoonShine\Decorations\Block;
 use MoonShine\Decorations\Column;
@@ -17,6 +18,7 @@ use MoonShine\Fields\Hidden;
 use MoonShine\Fields\ID;
 use MoonShine\Fields\Image;
 use MoonShine\Fields\Preview;
+use MoonShine\Fields\Relationships\BelongsTo;
 use MoonShine\Fields\Text;
 use MoonShine\Fields\TinyMce;
 use MoonShine\Pages\Crud\FormPage;
@@ -38,7 +40,7 @@ class WorkObjectFormPage extends FormPage
                     Block::make([
                         Hidden::make('creator')->fill( auth('moonshine')->id()),
                         Date::make('date_created')->withTime()->default($this->AktauTime())->required(),
-                        Text::make('client'),
+                        BelongsTo::make('contragent', resource: new ContragentResource())->nullable(),
                         Text::make('address')
                     ]),
                     LineBreak::make(),
