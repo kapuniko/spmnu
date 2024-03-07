@@ -27,6 +27,8 @@ class TaskResource extends ModelResource
 
     protected string $title = 'Tasks';
 
+    public string $column = 'name';
+
     protected bool $withPolicy = true;
 
     protected bool $saveFilterState = true;
