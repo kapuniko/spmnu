@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Pages\Task;
 
+use App\Enums\TaskStatus;
 use MoonShine\Decorations\Column;
 use MoonShine\Decorations\Grid;
 use MoonShine\Fields\Date;
+use MoonShine\Fields\Enum;
 use MoonShine\Fields\ID;
 use MoonShine\Fields\Preview;
 use MoonShine\Fields\Relationships\BelongsTo;
@@ -32,7 +34,10 @@ class TaskDetailPage extends DetailPage
                     Date::make('date_created')->format('d M Y — H:i'),
                     BelongsTo::make('performer', 'performerUser', resource: new MoonShineUserResource())
                         ->withImage('avatar'),
-                    Preview::make('status')->badge('yellow'),
+                    Enum::make('status')->attach(TaskStatus::class)
+                        ->sortable()
+                        ->translatable('moonshine::task')
+                        ->updateOnPreview(),
                     Date::make('deadline')->format('d M Y — H:i')
                 ])->columnSpan(4)
             ]),

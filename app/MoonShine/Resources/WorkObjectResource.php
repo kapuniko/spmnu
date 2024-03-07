@@ -21,6 +21,8 @@ class WorkObjectResource extends ModelResource
 
     protected string $title = 'WorkObjects';
 
+    public string $column = 'name';
+
     public function pages(): array
     {
         return [
