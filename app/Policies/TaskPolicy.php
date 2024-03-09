@@ -29,7 +29,7 @@ class TaskPolicy
 
     public function update(MoonshineUser $user, Task $item)
     {
-        return $user->id === $item->creator;
+        return true;
     }
 
     public function delete(MoonshineUser $user, Task $item)

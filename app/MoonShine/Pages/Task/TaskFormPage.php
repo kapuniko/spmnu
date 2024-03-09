@@ -34,7 +34,7 @@ class TaskFormPage extends FormPage
                 ])->columnSpan(8),
                 Column::make([
                     Block::make([
-                        Hidden::make('creator')->fill( auth('moonshine')->id()),
+                        Hidden::make($this->whoIsPage())->fill( auth('moonshine')->id()),
                         Date::make('date_created')->withTime()->default($this->AktauTime())->required(),
                         BelongsTo::make('performer', 'performerUser', resource: new MoonShineUserResource())
                             ->withImage('avatar')
@@ -78,5 +78,16 @@ class TaskFormPage extends FormPage
         $currentDateTime = date("d.m.Y H:i");
         $adjustedDateTime = date("d.m.Y H:i", strtotime($currentDateTime) + 5 * 3600);
         return $adjustedDateTime;
+    }
+
+    public function whoIsPage()
+    {
+        if ($this->getResource()->getItemID()) {
+            $wip = 'updater';
+        } else {
+            $wip = 'creator';
+        }
+
+        return $wip;
     }
 }

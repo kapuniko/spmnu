@@ -8,6 +8,8 @@ use MoonShine\Models\MoonshineUser;
 
 class StatusTracker extends Model
 {
+
+    protected $table = 'status_tracker';
     protected $fillable = [
         'status',
         'user_id',

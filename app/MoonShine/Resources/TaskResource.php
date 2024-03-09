@@ -11,11 +11,11 @@ use App\Models\Task;
 use App\MoonShine\Pages\Task\TaskIndexPage;
 use App\MoonShine\Pages\Task\TaskFormPage;
 use App\MoonShine\Pages\Task\TaskDetailPage;
+use Illuminate\Support\Facades\DB;
 use MoonShine\Fields\DateRange;
 use MoonShine\Fields\Enum;
 use MoonShine\Handlers\ExportHandler;
 use MoonShine\Handlers\ImportHandler;
-use MoonShine\QueryTags\QueryTag;
 use MoonShine\Resources\ModelResource;
 
 /**
@@ -54,7 +54,7 @@ class TaskResource extends ModelResource
     public function filters(): array
     {
         return[
-            Enum::make('status')->attach(TaskStatus::class),
+            Enum::make('status')->attach(TaskStatus::class)->multiple(),
             DateRange::make('Дата создания', 'date_created')
         ];
     }
@@ -92,33 +92,27 @@ class TaskResource extends ModelResource
             ->whereIn('status', ['new', 'at work']);
     }
 
-    public function queryTags(): array
-    {
-        return [
-            QueryTag::make(
-                'is new', // Tag Title
-                fn(Builder $query) => $query->where('status', '=', 'new')
-            ),
-            QueryTag::make(
-                'is at work', // Tag Title
-                fn(Builder $query) => $query->where('status', '=', 'at work')
-            ),
-            QueryTag::make(
-                'is postponed', // Tag Title
-                fn(Builder $query) => $query->where('status', '=', 'postponed')
-            ),
-            QueryTag::make(
-                'is done', // Tag Title
-                fn(Builder $query) => $query->where('status', '=', 'done')
-            ),
-            QueryTag::make(
-                'is canceled', // Tag Title
-                fn(Builder $query) => $query->where('status', '=', 'canceled')
-            ),
-        ];
-    }
+
     public function rules(Model $item): array
     {
         return [];
+    }
+
+    protected function afterUpdated(Model $item): Model
+    {
+        $taskId = $this->getItemID(); // Ваш ID задачи
+        $status = $item->status; // Новый статус
+        $userId = auth()->id(); // ID пользователя
+        $dateTime = now(); // Текущее время
+
+        DB::table('status_tracker')->insert([
+            'task_id' => $taskId,
+            'status' => $status,
+            'user_id' => $userId,
+            'date_time' => $dateTime,
+            // Добавьте другие поля, если необходимо
+        ]);
+
+        return $item;
     }
 }

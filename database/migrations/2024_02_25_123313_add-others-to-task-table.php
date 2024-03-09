@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::table('tasks', function (Blueprint $table) {
             $table->text("description")->nullable();
+            $table->bigInteger("updater")->nullable();
             $table->bigInteger("performer")->nullable();
             $table->text("status")->nullable();
             $table->dateTime('deadline')->nullable();
