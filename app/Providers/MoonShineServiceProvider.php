@@ -6,6 +6,7 @@ namespace App\Providers;
 
 use App\MoonShine\Resources\ContragentResource;
 use App\MoonShine\Resources\ContragentTypeResource;
+use App\MoonShine\Resources\StatusTrackerResource;
 use App\MoonShine\Resources\TaskResource;
 use App\MoonShine\Resources\WorkObjectResource;
 use MoonShine\Menu\MenuDivider;
@@ -48,7 +49,9 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
                ),
                 MenuDivider::make(),
                 MenuItem::make('ContragentType', new ContragentTypeResource())
-                    ->icon('heroicons.identification')
+                    ->icon('heroicons.identification'),
+                MenuItem::make('StatusTracker', new StatusTrackerResource() )
+                    ->icon('heroicons.table-cells')
             ])->canSee(fn() => auth()->user()->moonshine_user_role_id === 1),
 
             // MenuItem::make('Documentation', 'https://moonshine-laravel.com')

@@ -36,8 +36,7 @@ class TaskDetailPage extends DetailPage
                         ->withImage('avatar'),
                     Enum::make('status')->attach(TaskStatus::class)
                         ->sortable()
-                        ->translatable('moonshine::task')
-                        ->updateOnPreview(),
+                        ->translatable('moonshine::task'),
                     Date::make('deadline')->format('d M Y — H:i')
                 ])->columnSpan(4)
             ]),
