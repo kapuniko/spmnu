@@ -122,7 +122,7 @@ class TaskResource extends ModelResource
     {
         return function (Model $item, int $row, ComponentAttributeBag $attr): ComponentAttributeBag
         {
-            if ($item->status === 'done' ) {
+            if ($item->status === 'done' || $item->status === 'canceled' ) {
                 $attr->setAttributes([
                     'class' => 'bgc-gray'
                 ]);
