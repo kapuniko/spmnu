@@ -25,6 +25,10 @@ class ContragentResource extends ModelResource
 
     protected bool $withPolicy = true;
 
+    public function title(): string
+    {
+        return __('moonshine::contragent.Contragent');
+    }
     public function pages(): array
     {
         return [

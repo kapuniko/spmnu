@@ -23,6 +23,11 @@ class WorkObjectResource extends ModelResource
 
     public string $column = 'name';
 
+    public function title(): string
+    {
+        return __('moonshine::workObject.WorkObject');
+    }
+
     public function pages(): array
     {
         return [

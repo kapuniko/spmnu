@@ -16,10 +16,10 @@ class WorkObjectDetailPage extends DetailPage
     public function fields(): array
     {
         return [
-            ID::make(),
-            Text::make('name'),
-            TinyMce::make('description'),
+            Text::make('name')->translatable('moonshine::workObject'),
+            TinyMce::make('description')->translatable('moonshine::workObject'),
             HasMany::make('tasks', resource: new TaskResource())->creatable()
+                ->translatable('moonshine::workObject')
         ];
     }
 

@@ -21,8 +21,8 @@ class TaskIndexPage extends IndexPage
         return [
             Date::make('date_created')->format('d M H:i')->sortable()->translatable('moonshine::task'),
             Text::make('name')->translatable('moonshine::task'),
-            Image::make('Creator', 'user.avatar'),
-            Image::make('Performer', 'performerUser.avatar'),
+            Image::make('Creator', 'user.avatar')->translatable('moonshine::task'),
+            Image::make('Perf', 'performerUser.avatar')->translatable('moonshine::task'),
             Date::make('deadline')->format('d M H:i')->sortable()->translatable('moonshine::task'),
             Enum::make('status')->attach(TaskStatus::class)
                 ->sortable()

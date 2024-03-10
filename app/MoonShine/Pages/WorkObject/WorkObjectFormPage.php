@@ -34,21 +34,27 @@ class WorkObjectFormPage extends FormPage
             Grid::make([
                 Column::make([
                     Block::make([
-                        Text::make('name')->required(),
-                        TinyMce::make('description'),
+                        Text::make('name')->required()->translatable('moonshine::workObject'),
+                        TinyMce::make('description')->translatable('moonshine::workObject'),
                     ])
                 ])->columnSpan(8),
                 Column::make([
                     Block::make([
                         Hidden::make('creator')->fill( auth('moonshine')->id()),
-                        Date::make('date_created')->withTime()->default($this->AktauTime())->required(),
-                        BelongsTo::make('contragent', resource: new ContragentResource())->nullable(),
-                        Text::make('address')
+                        Date::make('date_created')->withTime()
+                            ->default($this->AktauTime())->required()
+                            ->translatable('moonshine::workObject'),
+                        BelongsTo::make('contragent', resource: new ContragentResource())
+                            ->nullable()
+                            ->translatable('moonshine::workObject'),
+                        Text::make('address')->translatable('moonshine::workObject')
                     ]),
                     LineBreak::make(),
                     Block::make([
-                        Text::make('status'),
-                        Date::make('deadline')->withTime()->format('d M Y — H:i')
+                        Text::make('status')->translatable('moonshine::workObject'),
+                        Date::make('deadline')->withTime()
+                            ->format('d M Y — H:i')
+                            ->translatable('moonshine::workObject')
                     ])
                 ])->columnSpan(4)
             ])

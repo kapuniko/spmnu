@@ -12,11 +12,13 @@ use App\MoonShine\Pages\Task\TaskIndexPage;
 use App\MoonShine\Pages\Task\TaskFormPage;
 use App\MoonShine\Pages\Task\TaskDetailPage;
 use Illuminate\Support\Facades\DB;
+use Illuminate\View\ComponentAttributeBag;
 use MoonShine\Fields\DateRange;
 use MoonShine\Fields\Enum;
 use MoonShine\Handlers\ExportHandler;
 use MoonShine\Handlers\ImportHandler;
 use MoonShine\Resources\ModelResource;
+use Closure;
 
 /**
  * @extends ModelResource<Task>
@@ -114,5 +116,19 @@ class TaskResource extends ModelResource
         ]);
 
         return $item;
+    }
+
+    public function trAttributes(): Closure
+    {
+        return function (Model $item, int $row, ComponentAttributeBag $attr): ComponentAttributeBag
+        {
+            if ($item->status === 'done' ) {
+                $attr->setAttributes([
+                    'class' => 'bgc-gray'
+                ]);
+            }
+
+            return $attr;
+        };
     }
 }

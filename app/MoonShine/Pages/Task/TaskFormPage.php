@@ -28,24 +28,28 @@ class TaskFormPage extends FormPage
             Grid::make([
                 Column::make([
                     Block::make([
-                        Text::make('name')->required(),
-                        TinyMce::make('description'),
+                        Text::make('name')->required()->translatable('moonshine::task'),
+                        TinyMce::make('description')->translatable('moonshine::task'),
                     ])
                 ])->columnSpan(8),
                 Column::make([
                     Block::make([
                         Hidden::make($this->whoIsPage())->fill( auth('moonshine')->id()),
-                        Date::make('date_created')->withTime()->default($this->AktauTime())->required(),
-                        BelongsTo::make('performer', 'performerUser', resource: new MoonShineUserResource())
+                        Date::make('date_created')->withTime()->default($this->AktauTime())
+                            ->required()->translatable('moonshine::task'),
+                        BelongsTo::make('Performer', 'performerUser', resource: new MoonShineUserResource())
                             ->withImage('avatar')
-                            ->default(MoonshineUser::find(auth('moonshine')->id())),
+                            ->default(MoonshineUser::find(auth('moonshine')->id()))
+                            ->translatable('moonshine::task'),
                         BelongsTo::make('workObject', 'workObject', 'name', resource: new WorkObjectResource())
                             ->nullable()
+                            ->translatable('moonshine::task')
                     ]),
                     LineBreak::make(),
                     Block::make([
-                        Enum::make('status')->attach(TaskStatus::class),
+                        Enum::make('status')->attach(TaskStatus::class)->translatable('moonshine::task'),
                         Date::make('deadline')->withTime()->format('d M Y — H:i')
+                            ->translatable('moonshine::task')
                     ])
                 ])->columnSpan(4)
             ]),

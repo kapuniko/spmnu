@@ -7,5 +7,8 @@ return [
     'date_created' => 'Created at',
     'status' => 'Status',
     'deadline' => 'Deadline',
-    'creator' => 'Creator'
+    'Creator' => 'Creator',
+    'Performer' => 'Performer',
+    'Perf' => 'Perf.',
+    'workObject' => 'Object'
 ];

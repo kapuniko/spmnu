@@ -32,12 +32,15 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
     {
         return [
             MenuItem::make('WorkObject', new WorkObjectResource())
-                ->icon('heroicons.building-office-2'),
+                ->icon('heroicons.building-office-2')
+                ->translatable('moonshine::workObject'),
             MenuItem::make('Task', new TaskResource())
                 ->icon('heroicons.table-cells')
                 ->badge(fn() => (new TaskResource())->countWorkingItems()->count())
                 ->translatable('moonshine::task'),
-            MenuItem::make('Contragents', new ContragentResource())->icon('heroicons.identification'),
+            MenuItem::make('Contragent', new ContragentResource())
+                ->icon('heroicons.identification')
+                ->translatable('moonshine::contragent'),
             MenuGroup::make(static fn() => __('moonshine::ui.resource.system'), [
                MenuItem::make(
                    static fn() => __('moonshine::ui.resource.admins_title'),
