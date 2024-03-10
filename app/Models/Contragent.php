@@ -34,5 +34,10 @@ class Contragent extends Model
         return $this->hasMany(WorkObject::class);
     }
 
+    public function person(): HasMany
+    {
+        return $this->hasMany(ContragentPerson::class, 'contragent_id', 'id');
+    }
+
 }
 
