@@ -7,5 +7,8 @@ return [
     'date_created' => 'Дата создания',
     'status' => 'Статус',
     'deadline' => 'Крайний срок',
-    'creator' => ''
+    'Creator' => 'Созд.',
+    'Performer' => 'Исполнитель',
+    'Perf' => 'Исп.',
+    'workObject' => 'Объект'
 ];

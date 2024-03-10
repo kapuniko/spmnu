@@ -14,7 +14,7 @@ class WorkObjectIndexPage extends IndexPage
     {
         return [
             ID::make(),
-            Text::make('name')
+            Text::make('name')->translatable('moonshine::workObject')
         ];
     }
 

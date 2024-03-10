@@ -25,34 +25,48 @@ class ContragentFormPage extends FormPage
         return [
             Block::make([
                 Grid::make([
-                    Column::make([ BelongsTo::make('contragentType') ])->columnSpan(3),
-                    Column::make([ Text::make('name') ])->columnSpan(9)
+                    Column::make([
+                        BelongsTo::make('contragentType')
+                        ->translatable('moonshine::contragent')
+                    ])->columnSpan(3),
+                    Column::make([
+                        Text::make('name')->translatable('moonshine::contragent')
+                    ])->columnSpan(9)
                 ])
             ]),
             LineBreak::make(),
             Block::make('сontacts',[
                 Grid::make([
-                    Column::make([ Phone::make('phone') ])->columnSpan(6),
-                    Column::make([ Email::make('email') ])->columnSpan(6),
+                    Column::make([
+                        Phone::make('phone')->translatable('moonshine::contragent')
+                    ])->columnSpan(6),
+                    Column::make([
+                        Email::make('email')->translatable('moonshine::contragent')
+                    ])->columnSpan(6),
                 ]),
                 LineBreak::make(),
-                Text::make('address'),
-            ]),
+                Text::make('address')->translatable('moonshine::contragent'),
+            ])->translatable('moonshine::contragent'),
             LineBreak::make(),
             Block::make('requisites',[
                 Grid::make([
-                    Column::make([ Text::make('iin') ])->columnSpan(6),
-                    Column::make([ Text::make('rnn') ])->columnSpan(6),
-                ]),
-                Grid::make([
-                    Column::make([ Text::make('bin') ])->columnSpan(6),
-                    Column::make([ Text::make('gos_reg') ])->columnSpan(6),
+                    Column::make([ Text::make('iin')->translatable('moonshine::contragent') ])
+                        ->columnSpan(6),
+                    Column::make([ Text::make('rnn')->translatable('moonshine::contragent') ])
+                        ->columnSpan(6),
                 ]),
                 LineBreak::make(),
-                Textarea::make('bank_detail'),
-            ]),
+                Grid::make([
+                    Column::make([ Text::make('bin')->translatable('moonshine::contragent') ])
+                        ->columnSpan(6),
+                    Column::make([ Text::make('gos_reg')->translatable('moonshine::contragent') ])
+                        ->columnSpan(6),
+                ]),
+                LineBreak::make(),
+                Textarea::make('bank_detail')->translatable('moonshine::contragent'),
+            ])->translatable('moonshine::contragent'),
             LineBreak::make(),
-            TinyMce::make('description')
+            TinyMce::make('description')->translatable('moonshine::contragent')
         ];
     }
 

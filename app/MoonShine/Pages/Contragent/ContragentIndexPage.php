@@ -17,10 +17,10 @@ class ContragentIndexPage extends IndexPage
     {
         return [
             ID::make(),
-            BelongsTo::make('contragentType'),
-            Text::make('name'),
-            Phone::make('phone'),
-            Email::make('email'),
+            BelongsTo::make('contragentType')->translatable('moonshine::contragent'),
+            Text::make('name')->translatable('moonshine::contragent'),
+            Phone::make('phone')->translatable('moonshine::contragent'),
+            Email::make('email')->translatable('moonshine::contragent'),
         ];
     }
 

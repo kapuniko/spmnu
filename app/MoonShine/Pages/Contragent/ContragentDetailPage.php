@@ -17,17 +17,17 @@ class ContragentDetailPage extends DetailPage
     {
         return [
             ID::make(),
-            BelongsTo::make('contragentType'),
-            Text::make('name'),
-            Text::make('phone'),
-            Text::make('email'),
-            Text::make('address'),
-            Text::make('iin'),
-            Text::make('rnn'),
-            Text::make('bin'),
-            Text::make('gos_reg'),
-            Textarea::make('bank_detail'),
-            TinyMce::make('description')
+            BelongsTo::make('contragentType')->translatable('moonshine::contragent'),
+            Text::make('name')->translatable('moonshine::contragent'),
+            Text::make('phone')->translatable('moonshine::contragent'),
+            Text::make('email')->translatable('moonshine::contragent'),
+            Text::make('address')->translatable('moonshine::contragent'),
+            Text::make('iin')->translatable('moonshine::contragent'),
+            Text::make('rnn')->translatable('moonshine::contragent'),
+            Text::make('bin')->translatable('moonshine::contragent'),
+            Text::make('gos_reg')->translatable('moonshine::contragent'),
+            Textarea::make('bank_detail')->translatable('moonshine::contragent'),
+            TinyMce::make('description')->translatable('moonshine::contragent')
         ];
     }
 
