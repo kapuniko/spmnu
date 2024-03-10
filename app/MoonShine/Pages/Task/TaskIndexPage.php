@@ -7,9 +7,8 @@ namespace App\MoonShine\Pages\Task;
 use App\Enums\TaskStatus;
 use MoonShine\Fields\Date;
 use MoonShine\Fields\Enum;
+use MoonShine\Fields\Field;
 use MoonShine\Fields\Image;
-use MoonShine\Fields\Preview;
-use MoonShine\Fields\Relationships\BelongsToMany;
 use MoonShine\Fields\Text;
 use MoonShine\Pages\Crud\IndexPage;
 
@@ -19,11 +18,15 @@ class TaskIndexPage extends IndexPage
     public function fields(): array
     {
         return [
-            Date::make('date_created')->format('d M H:i')->sortable()->translatable('moonshine::task'),
+            Date::make('date_created')->format('d M H:i')->sortable()
+                ->translatable('moonshine::task')
+                ->badge(),
             Text::make('name')->translatable('moonshine::task'),
             Image::make('Creator', 'user.avatar')->translatable('moonshine::task'),
             Image::make('Perf', 'performerUser.avatar')->translatable('moonshine::task'),
-            Date::make('deadline')->format('d M H:i')->sortable()->translatable('moonshine::task'),
+            Date::make('deadline')->format('d M H:i')->sortable()
+                ->translatable('moonshine::task')
+                ->badge(fn($deadline, Field $field) => $this->deadlineColor($deadline, $field) ),
             Enum::make('status')->attach(TaskStatus::class)
                 ->sortable()
                 ->translatable('moonshine::task')
@@ -51,4 +54,27 @@ class TaskIndexPage extends IndexPage
             ...parent::bottomLayer()
         ];
     }
+
+    public function deadlineColor($deadline, $field): String
+    {
+        $color = 'gray';
+        $status = $field->getData()->status;
+
+        if ($deadline < now()){
+            $color = 'red';
+        } else {
+            $color = 'blue';
+        }
+
+        if(empty($deadline)){$color = 'white';}
+
+        if ($status == 'done' || $status == 'canceled'){
+            $color = 'gray';
+        }
+
+
+
+        return $color;
+    }
+
 }

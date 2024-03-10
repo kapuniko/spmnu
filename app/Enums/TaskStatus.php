@@ -43,7 +43,7 @@ enum TaskStatus: string
     {
         return match ($this) {
             self::NEW => 'Новая',
-            self::AT_WORK => 'В работе',
+            self::AT_WORK => 'В&nbsp;работе',
             self::POSTPONED => 'Остановлена',
             self::DONE => 'Выполнена',
             self::CANCELED => 'Отменена',
@@ -65,7 +65,7 @@ enum TaskStatus: string
     {
         return match ($this) {
             self::NEW => 'New',
-            self::AT_WORK => 'At work',
+            self::AT_WORK => 'At&nbsp;work',
             self::POSTPONED => 'Postponed',
             self::DONE => 'Done',
             self::CANCELED => 'Canceled',
