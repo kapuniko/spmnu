@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\MoonShine\Resources\ContragentPersonResource;
 use App\MoonShine\Resources\ContragentResource;
 use App\MoonShine\Resources\ContragentTypeResource;
 use App\MoonShine\Resources\StatusTrackerResource;
@@ -53,6 +54,9 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
                 MenuDivider::make(),
                 MenuItem::make('ContragentType', new ContragentTypeResource())
                     ->icon('heroicons.identification'),
+                MenuItem::make('ContragentPerson', new ContragentPersonResource())
+                    ->icon('heroicons.users'),
+                MenuDivider::make(),
                 MenuItem::make('StatusTracker', new StatusTrackerResource() )
                     ->icon('heroicons.table-cells')
             ])->canSee(fn() => auth()->user()->moonshine_user_role_id === 1),

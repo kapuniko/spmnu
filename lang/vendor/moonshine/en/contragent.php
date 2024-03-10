@@ -6,7 +6,7 @@ return [
     'contragentType' => 'Type',
     'name' => 'Name',
     'description' => 'Description',
-    'сontacts' => 'Contacts',
+    'contacts' => 'Contacts',
     'phone' => 'Phone',
     'email' => 'Email',
     'address' => 'Address',
@@ -15,5 +15,11 @@ return [
     'rnn' => 'RNN',
     'bin' => 'BIN',
     'gos_reg' => 'Cert. of state reg.',
-    'bank_detail' => 'Bank detail'
+    'bank_detail' => 'Bank detail',
+    'post' => 'Post',
+    'firstname' => 'Firstname',
+    'secondname' => 'Second name',
+    'surname' => 'Surname',
+    'initials' => 'Initials',
+    'person' => 'Persons'
 ];
