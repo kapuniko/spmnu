@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\MoonShine\Pages\Task;
 
 use App\Enums\TaskStatus;
+use App\MoonShine\Pages\HasAktauTime;
 use App\MoonShine\Resources\WorkObjectResource;
 use MoonShine\Decorations\Block;
 use MoonShine\Decorations\Column;
@@ -22,6 +23,7 @@ use MoonShine\Resources\MoonShineUserResource;
 
 class TaskFormPage extends FormPage
 {
+    use HasAktauTime;
     public function fields(): array
     {
         return [
@@ -77,12 +79,6 @@ class TaskFormPage extends FormPage
         ];
     }
 
-    public function AktauTime()
-    {
-        $currentDateTime = date("d.m.Y H:i");
-        $adjustedDateTime = date("d.m.Y H:i", strtotime($currentDateTime) + 5 * 3600);
-        return $adjustedDateTime;
-    }
 
     public function whoIsPage()
     {
