@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\MoonShine\Resources;
 
 use App\Enums\TaskStatus;
+use App\MoonShine\Pages\HasAktauTime;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Task;
@@ -25,6 +26,8 @@ use Closure;
  */
 class TaskResource extends ModelResource
 {
+    use HasAktauTime;
+
     protected string $model = Task::class;
 
     protected string $title = 'Tasks';
@@ -105,7 +108,7 @@ class TaskResource extends ModelResource
         $taskId = $this->getItemID(); // Ваш ID задачи
         $status = $item->status; // Новый статус
         $userId = auth()->id(); // ID пользователя
-        $dateTime = now(); // Текущее время
+        $dateTime = $this->AktauTimeToBase(); // Текущее время
 
         DB::table('status_tracker')->insert([
             'task_id' => $taskId,

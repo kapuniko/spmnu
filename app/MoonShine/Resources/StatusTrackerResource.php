@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace App\MoonShine\Resources;
 
 use App\Enums\TaskStatus;
+use App\MoonShine\Pages\HasAktauTime;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\StatusTracker;
 
 use MoonShine\Fields\Date;
 use MoonShine\Fields\Enum;
 use MoonShine\Fields\Relationships\BelongsTo;
-use MoonShine\Fields\Text;
 use MoonShine\Resources\ModelResource;
 use MoonShine\Decorations\Block;
 use MoonShine\Fields\ID;
@@ -22,6 +22,8 @@ use MoonShine\Resources\MoonShineUserResource;
  */
 class StatusTrackerResource extends ModelResource
 {
+    use HasAktauTime;
+
     protected string $model = StatusTracker::class;
 
     protected string $title = 'StatusTrackers';

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\MoonShine\Pages\WorkObject;
 
 use App\Models\Task;
+use App\MoonShine\Pages\HasAktauTime;
 use App\MoonShine\Resources\ContragentResource;
 use App\MoonShine\Resources\TaskResource;
 use MoonShine\Components\TableBuilder;
@@ -28,6 +29,7 @@ use MoonShine\TypeCasts\ModelCast;
 
 class WorkObjectFormPage extends FormPage
 {
+    use HasAktauTime;
     public function fields(): array
     {
         return [
@@ -82,10 +84,4 @@ class WorkObjectFormPage extends FormPage
         ];
     }
 
-    public function AktauTime()
-    {
-        $currentDateTime = date("d.m.Y H:i");
-        $adjustedDateTime = date("d.m.Y H:i", strtotime($currentDateTime) + 5 * 3600);
-        return $adjustedDateTime;
-    }
 }
