@@ -23,7 +23,7 @@ use MoonShine\Resources\MoonShineUserResource;
 
 class TaskFormPage extends FormPage
 {
-    use HasAktauTime;
+    use HasAktauTime; 
     public function fields(): array
     {
         return [
@@ -31,7 +31,8 @@ class TaskFormPage extends FormPage
                 Column::make([
                     Block::make([
                         Text::make('name')->required()->translatable('moonshine::task'),
-                        TinyMce::make('description')->translatable('moonshine::task'),
+                        TinyMce::make('description')
+                        ->translatable('moonshine::task'),
                     ])
                 ])->columnSpan(8),
                 Column::make([
@@ -82,7 +83,7 @@ class TaskFormPage extends FormPage
 
     public function whoIsPage()
     {
-        if ($this->getResource()->getItemID()) {
+        if ($this->getResource()->getItem()) {
             $wip = 'updater';
         } else {
             $wip = 'creator';
