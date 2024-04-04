@@ -21,6 +21,8 @@ return new class extends Migration
             $table->bigInteger('creator')->nullable();
             $table->text('status')->nullable();
             $table->text('description')->nullable();
+            $table->integer('performer')->nullable();
+            $table->json('members')->nullable();
             $table->timestamps();
         });
     }

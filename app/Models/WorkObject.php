@@ -2,26 +2,25 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Contragent;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use MoonShine\Models\MoonshineUser;
-use App\Models\Contragent;
 
 class WorkObject extends Model
 {
-    use HasFactory;
 
     protected $fillable = [
         'name',
         'address',
         'date_created',
         'deadline',
-
         'creator',
         'status',
-        'description'
+        'description',
+        'performer',
     ];
 
     public function user(): BelongsTo
@@ -38,6 +37,14 @@ class WorkObject extends Model
         return $this->hasMany(Task::class);
     }
 
+    public function performer_id(): BelongsTo
+    {
+        return $this->belongsTo(MoonshineUser::class, 'performer', 'id');
+    }
 
+    public function members_id(): BelongsToMany
+    {
+        return $this->belongsToMany(MoonshineUser::class);
+    }
 
 }

@@ -9,8 +9,10 @@ return [
     'deadline' => 'Deadline',
     'Creator' => 'Creator',
     'Performer' => 'Performer',
+    'Perf' => 'Perf.',
     'workObject' => 'Object',
     'contragent' => 'Contragent',
     'address' => 'Object address',
-    'tasks' => 'Tasks for this object'
+    'tasks' => 'Tasks for this object',
+    'Members' => 'Members'
 ];

@@ -4,28 +4,21 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Pages\WorkObject;
 
-use App\Models\Task;
 use App\MoonShine\Pages\HasAktauTime;
 use App\MoonShine\Resources\ContragentResource;
-use App\MoonShine\Resources\TaskResource;
-use MoonShine\Components\TableBuilder;
 use MoonShine\Decorations\Block;
 use MoonShine\Decorations\Column;
-use MoonShine\Decorations\Divider;
 use MoonShine\Decorations\Grid;
-use MoonShine\Decorations\Heading;
 use MoonShine\Decorations\LineBreak;
 use MoonShine\Fields\Date;
 use MoonShine\Fields\Hidden;
-use MoonShine\Fields\ID;
-use MoonShine\Fields\Image;
-use MoonShine\Fields\Preview;
 use MoonShine\Fields\Relationships\BelongsTo;
-use MoonShine\Fields\Relationships\HasMany;
+use MoonShine\Fields\Relationships\BelongsToMany;
 use MoonShine\Fields\Text;
 use MoonShine\Fields\TinyMce;
+use MoonShine\Models\MoonshineUser;
 use MoonShine\Pages\Crud\FormPage;
-use MoonShine\TypeCasts\ModelCast;
+use MoonShine\Resources\MoonShineUserResource;
 
 class WorkObjectFormPage extends FormPage
 {
@@ -46,6 +39,14 @@ class WorkObjectFormPage extends FormPage
                         Date::make('date_created')->withTime()
                             ->default($this->AktauTime())->required()
                             ->translatable('moonshine::workObject'),
+                        BelongsTo::make('Performer', 'performer_id', resource: new MoonShineUserResource())
+                            ->withImage('avatar')
+                            ->default(MoonshineUser::find(auth('moonshine')->id()))
+                            ->translatable('moonshine::workObject'),
+                        BelongsToMany::make('Members', 'members_id', resource: new MoonShineUserResource())
+                            ->nullable()
+                            ->translatable('moonshine::workObject')
+                            ->selectMode(),
                         BelongsTo::make('contragent', resource: new ContragentResource())
                             ->nullable()
                             ->translatable('moonshine::workObject'),

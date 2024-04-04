@@ -23,7 +23,7 @@ use MoonShine\Resources\MoonShineUserResource;
 
 class TaskFormPage extends FormPage
 {
-    use HasAktauTime; 
+    use HasAktauTime;
     public function fields(): array
     {
         return [
@@ -81,7 +81,7 @@ class TaskFormPage extends FormPage
     }
 
 
-    public function whoIsPage()
+    public function whoIsPage(): string
     {
         if ($this->getResource()->getItem()) {
             $wip = 'updater';

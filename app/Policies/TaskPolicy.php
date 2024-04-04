@@ -39,12 +39,12 @@ class TaskPolicy
 
     public function restore(MoonshineUser $user, Task $item)
     {
-        return true;
+        return $user->moonshine_user_role_id === 1;
     }
 
     public function forceDelete(MoonshineUser $user, Task $item)
     {
-        return true;
+        return $user->moonshine_user_role_id === 1;
     }
 
     public function massDelete(MoonshineUser $user)

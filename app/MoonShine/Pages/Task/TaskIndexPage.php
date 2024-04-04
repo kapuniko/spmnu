@@ -72,8 +72,6 @@ class TaskIndexPage extends IndexPage
             $color = 'gray';
         }
 
-
-
         return $color;
     }
 

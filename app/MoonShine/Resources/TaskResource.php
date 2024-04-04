@@ -18,6 +18,7 @@ use MoonShine\Fields\DateRange;
 use MoonShine\Fields\Enum;
 use MoonShine\Handlers\ExportHandler;
 use MoonShine\Handlers\ImportHandler;
+use MoonShine\Metrics\ValueMetric;
 use MoonShine\Resources\ModelResource;
 use Closure;
 
