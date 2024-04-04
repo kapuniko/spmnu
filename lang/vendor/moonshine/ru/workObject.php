@@ -8,9 +8,11 @@ return [
     'status' => 'Статус',
     'deadline' => 'Крайний срок',
     'Creator' => 'Созд.',
-    'Performer' => 'Исп.',
+    'Performer' => 'Ответственный',
+    'Perf' => 'Отв.',
     'workObject' => 'Объект',
     'contragent' => 'Контрагент',
     'address' => 'Адрес объекта',
-    'tasks' => 'Задачи по объекту'
+    'tasks' => 'Задачи по объекту',
+    'Members' => 'Участники'
 ];
