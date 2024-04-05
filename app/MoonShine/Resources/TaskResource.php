@@ -14,6 +14,7 @@ use App\MoonShine\Pages\Task\TaskFormPage;
 use App\MoonShine\Pages\Task\TaskDetailPage;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\ComponentAttributeBag;
+use MoonShine\Enums\ClickAction;
 use MoonShine\Fields\DateRange;
 use MoonShine\Fields\Enum;
 use MoonShine\Handlers\ExportHandler;
@@ -38,6 +39,8 @@ class TaskResource extends ModelResource
     protected bool $withPolicy = true;
 
     protected bool $saveFilterState = true;
+
+    protected ?ClickAction $clickAction = ClickAction::DETAIL;
 
     public function title(): string
     {

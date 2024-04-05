@@ -10,6 +10,7 @@ use App\MoonShine\Pages\Contragent\ContragentIndexPage;
 use App\MoonShine\Pages\Contragent\ContragentFormPage;
 use App\MoonShine\Pages\Contragent\ContragentDetailPage;
 
+use MoonShine\Enums\ClickAction;
 use MoonShine\Resources\ModelResource;
 
 /**
@@ -23,6 +24,7 @@ class ContragentResource extends ModelResource
 
     public string $column = 'name';
 
+    protected ?ClickAction $clickAction = ClickAction::DETAIL;
     protected bool $withPolicy = true;
 
     public function title(): string

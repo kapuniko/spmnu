@@ -11,6 +11,7 @@ use App\MoonShine\Pages\WorkObject\WorkObjectIndexPage;
 use App\MoonShine\Pages\WorkObject\WorkObjectFormPage;
 use App\MoonShine\Pages\WorkObject\WorkObjectDetailPage;
 
+use MoonShine\Enums\ClickAction;
 use MoonShine\Resources\ModelResource;
 
 /**
@@ -30,6 +31,8 @@ class WorkObjectResource extends ModelResource
     {
         return __('moonshine::workObject.WorkObject');
     }
+
+    protected ?ClickAction $clickAction = ClickAction::DETAIL;
 
     public function pages(): array
     {

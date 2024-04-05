@@ -8,11 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\ContragentPerson;
 
 use Illuminate\Support\Facades\DB;
+use MoonShine\Decorations\Column;
+use MoonShine\Decorations\Grid;
+use MoonShine\Decorations\LineBreak;
 use MoonShine\Fields\Relationships\BelongsTo;
 use MoonShine\Fields\Text;
+use MoonShine\Fields\TinyMce;
 use MoonShine\Resources\ModelResource;
 use MoonShine\Decorations\Block;
-use function PHPUnit\Framework\isNull;
 
 /**
  * @extends ModelResource<ContragentPerson>
@@ -26,17 +29,35 @@ class ContragentPersonResource extends ModelResource
     public function fields(): array
     {
         return [
+
             Block::make([
                 BelongsTo::make('contragent')->nullable()->translatable('moonshine::contragent')->hideOnIndex(),
                 Text::make('post')->translatable('moonshine::contragent'),
-                Text::make('firstname')->translatable('moonshine::contragent')->hideOnIndex(),
-                Text::make('secondname')->translatable('moonshine::contragent')->hideOnIndex(),
-                Text::make('surname')->translatable('moonshine::contragent')->hideOnIndex(),
+                LineBreak::make(),
+                Grid::make([
+                    Column::make([
+                        Text::make('firstname')->translatable('moonshine::contragent')->hideOnIndex(),
+                    ])->columnSpan(4),
+                    Column::make([
+                        Text::make('secondname')->translatable('moonshine::contragent')->hideOnIndex(),
+                    ])->columnSpan(4),
+                    Column::make([
+                        Text::make('surname')->translatable('moonshine::contragent')->hideOnIndex(),
+                    ])->columnSpan(4)
+                ]),
                 Text::make('initials')->translatable('moonshine::contragent')->hideOnForm()->sortable(),
-                Text::make('phone')->translatable('moonshine::contragent'),
-                Text::make('email')->translatable('moonshine::contragent'),
-                Text::make('description')->translatable('moonshine::contragent'),
-            ]),
+                LineBreak::make(),
+                Grid::make([
+                    Column::make([
+                        Text::make('phone')->translatable('moonshine::contragent'),
+                    ])->columnSpan(6),
+                    Column::make([
+                        Text::make('email')->translatable('moonshine::contragent'),
+                    ])->columnSpan(6),
+                ]),
+                LineBreak::make(),
+                TinyMce::make('description')->translatable('moonshine::contragent'),
+            ])
         ];
     }
 
