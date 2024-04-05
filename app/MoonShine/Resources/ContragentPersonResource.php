@@ -12,7 +12,7 @@ use MoonShine\Fields\Relationships\BelongsTo;
 use MoonShine\Fields\Text;
 use MoonShine\Resources\ModelResource;
 use MoonShine\Decorations\Block;
-use MoonShine\Fields\ID;
+use function PHPUnit\Framework\isNull;
 
 /**
  * @extends ModelResource<ContragentPerson>
@@ -47,17 +47,41 @@ class ContragentPersonResource extends ModelResource
 
     protected function afterUpdated(Model $item): Model
     {
+        // Проверяем, есть ли значение, и используем его, или устанавливаем пустую строку
+        $firstname = $item->firstname ?? '';
+        $secondname = $item->secondname ?? '';
+        $surname = $item->surname ?? '';
 
-        $firstname = $item->firstname;
-        $secondname = $item->secondname;
-        $surname = $item->surname;
+        //ну потомушто заебал он меня блять, я нихуя не понял схуя туда NULL идёт, хоть обосрись
+        function blyat($suka): string
+        {
+            if(!is_null($suka) && !empty($suka) && isset($suka) && strlen($suka) > 0){
+                return mb_substr($suka, 0, 1) . '.';
+            } else { return ''; }
+        }
 
-        // Получаем первую букву из $secondname и $surname
-        $secondnameInitial = mb_substr($secondname, 0, 1, 'UTF-8');
-        $surnameInitial = mb_substr($surname, 0, 1, 'UTF-8');
+        // Получаем первую букву из $secondname и $surname, если они не null и не пустые
+        $secondnameInitial = '';
+        if (!empty($secondname)) {
+            $secondnameInitial = blyat($secondname);
+        }
+
+        $surnameInitial = '';
+        if (!empty($surname)) {
+            $surnameInitial = blyat($surname);
+        }
 
         // Формируем строку с инициалами
-        $initials = $firstname . ' ' . $secondnameInitial . '. ' . $surnameInitial . '.';
+        $initials = '';
+
+        // Если $firstname не пуст, формируем строку с именем и инициалами
+        if (!empty($firstname)) {
+            $initials = $firstname . ' ' . $secondnameInitial . ' ' . $surnameInitial;
+        }
+        // Если $firstname пуст, используем только $secondname и $surname
+        else {
+            $initials = $secondname . ' ' . $surname;
+        }
 
         DB::table('contragent_persons')
             ->where('id', $item->id)
@@ -66,19 +90,44 @@ class ContragentPersonResource extends ModelResource
         return $item;
     }
 
+
     protected function afterCreated(Model $item): Model
     {
+// Проверяем, есть ли значение, и используем его, или устанавливаем пустую строку
+        $firstname = $item->firstname ?? '';
+        $secondname = $item->secondname ?? '';
+        $surname = $item->surname ?? '';
 
-        $firstname = $item->firstname;
-        $secondname = $item->secondname;
-        $surname = $item->surname;
+        //ну потомушто заебал он меня блять, я нихуя не понял схуя туда NULL идёт, хоть обосрись
+        function blyat($suka): string
+        {
+            if(!is_null($suka) && !empty($suka) && isset($suka) && strlen($suka) > 0){
+                return mb_substr($suka, 0, 1) . '.';
+            } else { return ''; }
+        }
 
-        // Получаем первую букву из $secondname и $surname
-        $secondnameInitial = mb_substr($secondname, 0, 1, 'UTF-8');
-        $surnameInitial = mb_substr($surname, 0, 1, 'UTF-8');
+        // Получаем первую букву из $secondname и $surname, если они не null и не пустые
+        $secondnameInitial = '';
+        if (!empty($secondname)) {
+            $secondnameInitial = blyat($secondname);
+        }
+
+        $surnameInitial = '';
+        if (!empty($surname)) {
+            $surnameInitial = blyat($surname);
+        }
 
         // Формируем строку с инициалами
-        $initials = $firstname . ' ' . $secondnameInitial . '. ' . $surnameInitial . '.';
+        $initials = '';
+
+        // Если $firstname не пуст, формируем строку с именем и инициалами
+        if (!empty($firstname)) {
+            $initials = $firstname . ' ' . $secondnameInitial . ' ' . $surnameInitial;
+        }
+        // Если $firstname пуст, используем только $secondname и $surname
+        else {
+            $initials = $secondname . ' ' . $surname;
+        }
 
         DB::table('contragent_persons')
             ->where('id', $item->id)
