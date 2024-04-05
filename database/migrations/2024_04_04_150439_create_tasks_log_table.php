@@ -16,9 +16,12 @@ return new class extends Migration
             $table->bigInteger('task_id');
             $table->text('action');
             $table->jsonb('data')->nullable();
+            $table->integer('user_id')->nullable();
             $table->timestamps();
         });
     }
+
+    //в самой таблице потом выставить правило для crated_at чтобы DEFAULT CURRENT_TIMESTAMP
 
     /**
      * Reverse the migrations.
