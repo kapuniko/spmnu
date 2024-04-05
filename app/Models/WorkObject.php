@@ -21,6 +21,16 @@ class WorkObject extends Model
         'status',
         'description',
         'performer',
+        'files',
+        'contract_files',
+        'project_files'
+    ];
+
+
+    protected $casts = [
+        'files' => 'array', // указываем, что поле 'files' должно быть преобразовано в массив
+        'contract_files' => 'array',
+        'project_files' => 'array'
     ];
 
     public function user(): BelongsTo

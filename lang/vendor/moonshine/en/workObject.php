@@ -14,5 +14,8 @@ return [
     'contragent' => 'Contragent',
     'address' => 'Object address',
     'tasks' => 'Tasks for this object',
-    'Members' => 'Members'
+    'Members' => 'Members',
+    'files' => 'Other files',
+    'contract_files' => 'Contract files',
+    'project_files' => 'Project files'
 ];
