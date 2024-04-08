@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::table('tasks', function (Blueprint $table) {
             $table->bigInteger('work_object_id')->nullable();
+            $table->json('photos')->nullable();
         });
     }
 
