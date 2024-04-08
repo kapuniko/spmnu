@@ -34,7 +34,7 @@ class WorkObjectFormPage extends FormPage
 
         return [
             Tabs::make([
-                Tab::make('info',[
+                Tab::make('object_info',[
                     Grid::make([
                         Column::make([
                             Block::make([
@@ -70,8 +70,8 @@ class WorkObjectFormPage extends FormPage
                             ])
                         ])->columnSpan(4)
                     ]),
-                ]),
-                Tab::make('files',[
+                ])->translatable('moonshine::workObject')->icon('heroicons.outline.information-circle'),
+                Tab::make('object_files',[
                     Block::make([
                         File::make('contract_files')
                             ->dir( $this->filesDirectory() )
@@ -101,13 +101,17 @@ class WorkObjectFormPage extends FormPage
                             ->disableDeleteFiles()
                             ->translatable('moonshine::workObject')
                     ])
-                ])
+                ])->translatable('moonshine::workObject')->icon('heroicons.outline.document-text'),
+                Tab::make('object_photo', [
+                    Block::make('Photo')
+                ])->translatable('moonshine::workObject')->icon('heroicons.outline.photo')
             ]),
         ];
     }
 
 
-    public function filesDirectory(){
+    public function filesDirectory(): string
+    {
 
         $directory = 'objects/' . $this->getResource()->getItemID();
 

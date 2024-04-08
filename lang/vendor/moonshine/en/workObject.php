@@ -17,5 +17,8 @@ return [
     'Members' => 'Members',
     'files' => 'Other files',
     'contract_files' => 'Contract files',
-    'project_files' => 'Project files'
+    'project_files' => 'Project files',
+    'object_info' => 'Object info',
+    'object_files' => 'Documents',
+    'object_photo' => 'Object photos',
 ];
