@@ -23,6 +23,9 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->integer('performer')->nullable();
             $table->json('members')->nullable();
+            $table->json('files')->nullable();
+            $table->json('contract_files')->nullable();
+            $table->json('project_files')->nullable();
             $table->timestamps();
         });
     }

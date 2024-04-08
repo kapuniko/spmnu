@@ -17,5 +17,8 @@ return [
     'Members' => 'Участники',
     'files' => 'Другие файлы',
     'contract_files' => 'Файлы договора',
-    'project_files' => 'Файлы проекта'
+    'project_files' => 'Файлы проекта',
+    'object_info' => 'Информация по объекту',
+    'object_files' => 'Документы',
+    'object_photo' => 'Фотографии объекта',
 ];

@@ -17,5 +17,8 @@ return [
     'Members' => 'Қатысушылар',
     'files' => 'Басқа файлдар',
     'contract_files' => 'Келісімшарттық файлдар',
-    'project_files' => 'Жоба файлдары'
+    'project_files' => 'Жоба файлдары',
+    'object_info' => 'Нысан туралы ақпарат',
+    'object_files' => 'Құжаттар',
+    'object_photo' => 'Нысан фотосуреттері',
 ];
