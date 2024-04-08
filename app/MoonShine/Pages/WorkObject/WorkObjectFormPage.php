@@ -15,6 +15,7 @@ use MoonShine\Decorations\Tabs;
 use MoonShine\Fields\Date;
 use MoonShine\Fields\File;
 use MoonShine\Fields\Hidden;
+use MoonShine\Fields\Image;
 use MoonShine\Fields\Relationships\BelongsTo;
 use MoonShine\Fields\Relationships\BelongsToMany;
 use MoonShine\Fields\Text;
@@ -103,7 +104,15 @@ class WorkObjectFormPage extends FormPage
                     ])
                 ])->translatable('moonshine::workObject')->icon('heroicons.outline.document-text'),
                 Tab::make('object_photo', [
-                    Block::make('Photo')
+                    Block::make([
+                        Image::make('object_photo','photos')
+                            ->dir( $this->filesDirectory() )
+                            ->multiple()
+                            ->keepOriginalFileName()
+                            ->removable()
+                            ->disableDeleteFiles()
+                            ->translatable('moonshine::workObject')
+                    ])
                 ])->translatable('moonshine::workObject')->icon('heroicons.outline.photo')
             ]),
         ];
