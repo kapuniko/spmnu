@@ -22,24 +22,20 @@ class TaskDetailPage extends DetailPage
     public function fields(): array
     {
         return [
-            Grid::make([
-                Column::make([
-                    ID::make(),
-                    Text::make('name')->required(),
-                    TinyMce::make('description'),
-                ])->columnSpan(8),
-                Column::make([
-                    BelongsTo::make('creator', 'user', resource: new MoonShineUserResource())
-                        ->withImage('avatar'),
-                    Date::make('date_created')->format('d M Y — H:i'),
-                    BelongsTo::make('performer', 'performerUser', resource: new MoonShineUserResource())
-                        ->withImage('avatar'),
-                    Enum::make('status')->attach(TaskStatus::class)
-                        ->sortable()
-                        ->translatable('moonshine::task'),
-                    Date::make('deadline')->format('d M Y — H:i')
-                ])->columnSpan(4)
-            ]),
+            ID::make(),
+            Text::make('name')->translatable('moonshine::task'),
+            Date::make('date_created')->format('d M Y — H:i')
+                ->translatable('moonshine::task'),
+            Date::make('deadline')->format('d M Y — H:i')
+                ->translatable('moonshine::task'),
+            BelongsTo::make('Creator', 'user', resource: new MoonShineUserResource())
+                ->translatable('moonshine::task'),
+            BelongsTo::make('Performer', 'performerUser', resource: new MoonShineUserResource())
+                ->translatable('moonshine::task'),
+            Enum::make('status')->attach(TaskStatus::class)
+                ->translatable('moonshine::task'),
+
+            TinyMce::make('description')->translatable('moonshine::task'),
         ];
     }
 

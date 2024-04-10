@@ -14,6 +14,10 @@ use App\MoonShine\Pages\Task\TaskFormPage;
 use App\MoonShine\Pages\Task\TaskDetailPage;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\ComponentAttributeBag;
+use MoonShine\Buttons\DeleteButton;
+use MoonShine\Buttons\DetailButton;
+use MoonShine\Buttons\EditButton;
+use MoonShine\Buttons\MassDeleteButton;
 use MoonShine\Enums\ClickAction;
 use MoonShine\Fields\DateRange;
 use MoonShine\Fields\Enum;
@@ -57,6 +61,17 @@ class TaskResource extends ModelResource
                     : __('moonshine::ui.add')
             ),
             TaskDetailPage::make(__('moonshine::ui.show')),
+        ];
+    }
+
+    public function getIndexItemButtons(): array
+    {
+        return [
+            ...$this->getIndexButtons(),
+            DetailButton::for($this)->showInDropdown()->customAttributes(['class' => 'btn', 'style' => 'display:flex']),
+            EditButton::for($this)->showInDropdown()->primary()->customAttributes(['class' => 'btn', 'style' => 'display:flex']),
+            DeleteButton::for($this)->showInDropdown(),
+            MassDeleteButton::for($this)->showInDropdown(),
         ];
     }
 

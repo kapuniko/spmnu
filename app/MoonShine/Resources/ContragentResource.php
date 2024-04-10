@@ -10,6 +10,10 @@ use App\MoonShine\Pages\Contragent\ContragentIndexPage;
 use App\MoonShine\Pages\Contragent\ContragentFormPage;
 use App\MoonShine\Pages\Contragent\ContragentDetailPage;
 
+use MoonShine\Buttons\DeleteButton;
+use MoonShine\Buttons\DetailButton;
+use MoonShine\Buttons\EditButton;
+use MoonShine\Buttons\MassDeleteButton;
 use MoonShine\Enums\ClickAction;
 use MoonShine\Resources\ModelResource;
 
@@ -47,5 +51,16 @@ class ContragentResource extends ModelResource
     public function rules(Model $item): array
     {
         return [];
+    }
+
+    public function getIndexItemButtons(): array
+    {
+        return [
+            ...$this->getIndexButtons(),
+            DetailButton::for($this)->showInDropdown()->customAttributes(['class' => 'btn', 'style' => 'display:flex']),
+            EditButton::for($this)->showInDropdown()->primary()->customAttributes(['class' => 'btn', 'style' => 'display:flex']),
+            DeleteButton::for($this)->showInDropdown(),
+            MassDeleteButton::for($this)->showInDropdown(),
+        ];
     }
 }

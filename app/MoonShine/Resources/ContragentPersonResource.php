@@ -8,6 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\ContragentPerson;
 
 use Illuminate\Support\Facades\DB;
+use MoonShine\Buttons\DeleteButton;
+use MoonShine\Buttons\DetailButton;
+use MoonShine\Buttons\EditButton;
+use MoonShine\Buttons\MassDeleteButton;
+use MoonShine\Components\ActionGroup;
 use MoonShine\Decorations\Column;
 use MoonShine\Decorations\Grid;
 use MoonShine\Decorations\LineBreak;
@@ -58,6 +63,17 @@ class ContragentPersonResource extends ModelResource
                 LineBreak::make(),
                 TinyMce::make('description')->translatable('moonshine::contragent'),
             ])
+        ];
+    }
+
+    public function getIndexItemButtons(): array
+    {
+        return [
+            ...$this->getIndexButtons(),
+            DetailButton::for($this)->showInDropdown()->customAttributes(['class' => 'btn', 'style' => 'display:flex']),
+            EditButton::for($this)->showInDropdown()->primary()->customAttributes(['class' => 'btn', 'style' => 'display:flex']),
+            DeleteButton::for($this)->showInDropdown(),
+            MassDeleteButton::for($this)->showInDropdown(),
         ];
     }
 

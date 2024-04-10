@@ -11,6 +11,10 @@ use App\MoonShine\Pages\WorkObject\WorkObjectIndexPage;
 use App\MoonShine\Pages\WorkObject\WorkObjectFormPage;
 use App\MoonShine\Pages\WorkObject\WorkObjectDetailPage;
 
+use MoonShine\Buttons\DeleteButton;
+use MoonShine\Buttons\DetailButton;
+use MoonShine\Buttons\EditButton;
+use MoonShine\Buttons\MassDeleteButton;
 use MoonShine\Enums\ClickAction;
 use MoonShine\Resources\ModelResource;
 
@@ -44,6 +48,17 @@ class WorkObjectResource extends ModelResource
                     : __('moonshine::ui.add')
             ),
             WorkObjectDetailPage::make(isset($this->getItem()->name) ? $this->getItem()->name : __('moonshine::ui.show')),
+        ];
+    }
+
+    public function getIndexItemButtons(): array
+    {
+        return [
+            ...$this->getIndexButtons(),
+            DetailButton::for($this)->showInDropdown()->customAttributes(['class' => 'btn', 'style' => 'display:flex']),
+            EditButton::for($this)->showInDropdown()->primary()->customAttributes(['class' => 'btn', 'style' => 'display:flex']),
+            DeleteButton::for($this)->showInDropdown(),
+            MassDeleteButton::for($this)->showInDropdown(),
         ];
     }
 
