@@ -98,6 +98,20 @@
                 width: 100%;
                 height: 100%;
                 text-align: center;
+                /*perspective: 1000px;*/
+                /*animation: float 20s infinite;*/
+            }
+
+            @keyframes float{
+                0% {
+                    transform:  translateY(0px) rotateX(5deg) rotateY(5deg);
+                }
+                50%{
+                    transform:  translateY(10px) rotateX(-5deg) rotateY(5deg);
+                }
+                100% {
+                    transform:  translateY(0px) rotateX(5deg) rotateY(5deg);
+                }
             }
 
             svg{
@@ -110,7 +124,7 @@
                 stroke-width: 40;
                 stroke-opacity: 1;
                 stroke-miterlimit: 22.9256;
-                animation:  move 5s,
+                animation:  move 20s infinite,
                 mig 5s;
                 filter: drop-shadow(0px 0px 100px white)
                 drop-shadow(0px 0px 50px white);
@@ -133,10 +147,19 @@
 
             @keyframes move {
                 0% {
-                    stroke-dasharray: 0 100000;
+                    stroke-dasharray: 100 100000;
+                }
+                25% {
+                    stroke-dasharray: 10000 0;
+                }
+                50% {
+                    stroke-dasharray: 10000 0;
+                }
+                75% {
+                    stroke-dasharray: 100 100000;
                 }
                 100% {
-                    stroke-dasharray: 10000 0;
+                    stroke-dasharray: 0 100000;
                 }
             }
             @keyframes space {
@@ -225,6 +248,24 @@
                           dur="15s"
                           repeatCount="indefinite"
                           calcMode="linear">
+                          <mpath href="#uu" />
+                      </animateMotion>
+                  </g>
+                  <g class="star">
+                      <path d="M0 -50,-10 -10,-50 0,-10 10,0 60,10 10,60 0,10 -10z"/>
+                      <animateMotion
+                          dur="15s"
+                          repeatCount="indefinite"
+                          calcMode="linear">
+                          <mpath href="#nn" />
+                      </animateMotion>
+                  </g>
+                  <g class="star">
+                      <path d="M0 -50,-10 -10,-50 0,-10 10,0 60,10 10,60 0,10 -10z"/>
+                      <animateMotion
+                          dur="25s"
+                          repeatCount="indefinite"
+                          calcMode="linear">
                           <mpath href="#nn" />
                       </animateMotion>
                   </g>
@@ -232,6 +273,15 @@
                       <path d="M0 -50,-10 -10,-50 0,-10 10,0 60,10 10,60 0,10 -10z"/>
                       <animateMotion
                           dur="18s"
+                          repeatCount="indefinite"
+                          calcMode="linear">
+                          <mpath href="#mm" />
+                      </animateMotion>
+                  </g>
+                  <g class="star">
+                      <path d="M0 -50,-10 -10,-50 0,-10 10,0 60,10 10,60 0,10 -10z"/>
+                      <animateMotion
+                          dur="22s"
                           repeatCount="indefinite"
                           calcMode="linear">
                           <mpath href="#mm" />
@@ -249,7 +299,25 @@
                   <g class="star">
                       <path d="M0 -50,-10 -10,-50 0,-10 10,0 60,10 10,60 0,10 -10z"/>
                       <animateMotion
+                          dur="20s"
+                          repeatCount="indefinite"
+                          calcMode="linear">
+                          <mpath href="#pp" />
+                      </animateMotion>
+                  </g>
+                  <g class="star">
+                      <path d="M0 -50,-10 -10,-50 0,-10 10,0 60,10 10,60 0,10 -10z"/>
+                      <animateMotion
                           dur="15s"
+                          repeatCount="indefinite"
+                          calcMode="linear">
+                          <mpath href="#ss" />
+                      </animateMotion>
+                  </g>
+                  <g class="star">
+                      <path d="M0 -50,-10 -10,-50 0,-10 10,0 60,10 10,60 0,10 -10z"/>
+                      <animateMotion
+                          dur="25s"
                           repeatCount="indefinite"
                           calcMode="linear">
                           <mpath href="#ss" />
@@ -265,9 +333,27 @@
                       </animateMotion>
                   </g>
                   <g class="star">
+                      <path d="M0 -50,-10 -10,-50 0,-10 10,0 60,10 10,60 0,10 -10z"/>
+                      <animateMotion
+                          dur="25s"
+                          repeatCount="indefinite"
+                          calcMode="linear">
+                          <mpath href="#l1" />
+                      </animateMotion>
+                  </g>
+                  <g class="star">
                       <path d="M0 -50,-10 -10,-50 0,-10 10,0 50,10 10,50 0,10 -10z"/>
                       <animateMotion
                           dur="17s"
+                          repeatCount="indefinite"
+                          calcMode="linear">
+                          <mpath href="#l2" />
+                      </animateMotion>
+                  </g>
+                  <g class="star">
+                      <path d="M0 -50,-10 -10,-50 0,-10 10,0 50,10 10,50 0,10 -10z"/>
+                      <animateMotion
+                          dur="27s"
                           repeatCount="indefinite"
                           calcMode="linear">
                           <mpath href="#l2" />
@@ -283,9 +369,189 @@
                       </animateMotion>
                   </g>
                   <g class="star">
+                      <path d="M0 -50,-10 -10,-50 0,-10 10,0 60,10 10,60 0,10 -10z"/>
+                      <animateMotion
+                          dur="20s"
+                          repeatCount="indefinite"
+                          calcMode="linear">
+                          <mpath href="#l3" />
+                      </animateMotion>
+                  </g>
+                  <g class="star">
                       <path d="M0 -50,-10 -10,-50 0,-10 10,0 50,10 10,50 0,10 -10z"/>
                       <animateMotion
                           dur="15s"
+                          repeatCount="indefinite"
+                          calcMode="linear">
+                          <mpath href="#l4" />
+                      </animateMotion>
+                  </g>
+                  <g class="star">
+                      <path d="M0 -50,-10 -10,-50 0,-10 10,0 50,10 10,50 0,10 -10z"/>
+                      <animateMotion
+                          dur="10s"
+                          repeatCount="indefinite"
+                          calcMode="linear">
+                          <mpath href="#l4" />
+                      </animateMotion>
+                  </g>
+                  <g class="star">
+                      <path d="M0 -50,-10 -10,-50 0,-10 10,0 60,10 10,60 0,10 -10z"/>
+                      <animateMotion
+                          dur="22s"
+                          repeatCount="indefinite"
+                          calcMode="linear">
+                          <mpath href="#uu" />
+                      </animateMotion>
+                  </g>
+                  <g class="star">
+                      <path d="M0 -50,-10 -10,-50 0,-10 10,0 60,10 10,60 0,10 -10z"/>
+                      <animateMotion
+                          dur="12s"
+                          repeatCount="indefinite"
+                          calcMode="linear">
+                          <mpath href="#uu" />
+                      </animateMotion>
+                  </g>
+                  <g class="star">
+                      <path d="M0 -50,-10 -10,-50 0,-10 10,0 60,10 10,60 0,10 -10z"/>
+                      <animateMotion
+                          dur="12s"
+                          repeatCount="indefinite"
+                          calcMode="linear">
+                          <mpath href="#nn" />
+                      </animateMotion>
+                  </g>
+                  <g class="star">
+                      <path d="M0 -50,-10 -10,-50 0,-10 10,0 60,10 10,60 0,10 -10z"/>
+                      <animateMotion
+                          dur="22s"
+                          repeatCount="indefinite"
+                          calcMode="linear">
+                          <mpath href="#nn" />
+                      </animateMotion>
+                  </g>
+                  <g class="star">
+                      <path d="M0 -50,-10 -10,-50 0,-10 10,0 60,10 10,60 0,10 -10z"/>
+                      <animateMotion
+                          dur="15s"
+                          repeatCount="indefinite"
+                          calcMode="linear">
+                          <mpath href="#mm" />
+                      </animateMotion>
+                  </g>
+                  <g class="star">
+                      <path d="M0 -50,-10 -10,-50 0,-10 10,0 60,10 10,60 0,10 -10z"/>
+                      <animateMotion
+                          dur="19s"
+                          repeatCount="indefinite"
+                          calcMode="linear">
+                          <mpath href="#mm" />
+                      </animateMotion>
+                  </g>
+                  <g class="star">
+                      <path d="M0 -50,-10 -10,-50 0,-10 10,0 60,10 10,60 0,10 -10z"/>
+                      <animateMotion
+                          dur="27s"
+                          repeatCount="indefinite"
+                          calcMode="linear">
+                          <mpath href="#pp" />
+                      </animateMotion>
+                  </g>
+                  <g class="star">
+                      <path d="M0 -50,-10 -10,-50 0,-10 10,0 60,10 10,60 0,10 -10z"/>
+                      <animateMotion
+                          dur="17s"
+                          repeatCount="indefinite"
+                          calcMode="linear">
+                          <mpath href="#pp" />
+                      </animateMotion>
+                  </g>
+                  <g class="star">
+                      <path d="M0 -50,-10 -10,-50 0,-10 10,0 60,10 10,60 0,10 -10z"/>
+                      <animateMotion
+                          dur="12s"
+                          repeatCount="indefinite"
+                          calcMode="linear">
+                          <mpath href="#ss" />
+                      </animateMotion>
+                  </g>
+                  <g class="star">
+                      <path d="M0 -50,-10 -10,-50 0,-10 10,0 60,10 10,60 0,10 -10z"/>
+                      <animateMotion
+                          dur="22s"
+                          repeatCount="indefinite"
+                          calcMode="linear">
+                          <mpath href="#ss" />
+                      </animateMotion>
+                  </g>
+                  <g class="star">
+                      <path d="M0 -50,-10 -10,-50 0,-10 10,0 60,10 10,60 0,10 -10z"/>
+                      <animateMotion
+                          dur="15s"
+                          repeatCount="indefinite"
+                          calcMode="linear">
+                          <mpath href="#l1" />
+                      </animateMotion>
+                  </g>
+                  <g class="star">
+                      <path d="M0 -50,-10 -10,-50 0,-10 10,0 60,10 10,60 0,10 -10z"/>
+                      <animateMotion
+                          dur="22s"
+                          repeatCount="indefinite"
+                          calcMode="linear">
+                          <mpath href="#l1" />
+                      </animateMotion>
+                  </g>
+                  <g class="star">
+                      <path d="M0 -50,-10 -10,-50 0,-10 10,0 50,10 10,50 0,10 -10z"/>
+                      <animateMotion
+                          dur="13s"
+                          repeatCount="indefinite"
+                          calcMode="linear">
+                          <mpath href="#l2" />
+                      </animateMotion>
+                  </g>
+                  <g class="star">
+                      <path d="M0 -50,-10 -10,-50 0,-10 10,0 50,10 10,50 0,10 -10z"/>
+                      <animateMotion
+                          dur="23s"
+                          repeatCount="indefinite"
+                          calcMode="linear">
+                          <mpath href="#l2" />
+                      </animateMotion>
+                  </g>
+                  <g class="star">
+                      <path d="M0 -50,-10 -10,-50 0,-10 10,0 60,10 10,60 0,10 -10z"/>
+                      <animateMotion
+                          dur="26s"
+                          repeatCount="indefinite"
+                          calcMode="linear">
+                          <mpath href="#l3" />
+                      </animateMotion>
+                  </g>
+                  <g class="star">
+                      <path d="M0 -50,-10 -10,-50 0,-10 10,0 60,10 10,60 0,10 -10z"/>
+                      <animateMotion
+                          dur="17s"
+                          repeatCount="indefinite"
+                          calcMode="linear">
+                          <mpath href="#l3" />
+                      </animateMotion>
+                  </g>
+                  <g class="star">
+                      <path d="M0 -50,-10 -10,-50 0,-10 10,0 50,10 10,50 0,10 -10z"/>
+                      <animateMotion
+                          dur="13s"
+                          repeatCount="indefinite"
+                          calcMode="linear">
+                          <mpath href="#l4" />
+                      </animateMotion>
+                  </g>
+                  <g class="star">
+                      <path d="M0 -50,-10 -10,-50 0,-10 10,0 50,10 10,50 0,10 -10z"/>
+                      <animateMotion
+                          dur="14s"
                           repeatCount="indefinite"
                           calcMode="linear">
                           <mpath href="#l4" />

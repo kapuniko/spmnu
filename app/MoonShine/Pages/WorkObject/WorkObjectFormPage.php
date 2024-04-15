@@ -106,7 +106,7 @@ class WorkObjectFormPage extends FormPage
                 Tab::make('object_photo', [
                     Block::make([
                         Image::make('object_photo','photos')
-                            ->dir( $this->filesDirectory() )
+                            ->dir( $this->cloudDirectory() )
                             ->multiple()
                             ->keepOriginalFileName()
                             ->removable()
@@ -123,6 +123,21 @@ class WorkObjectFormPage extends FormPage
     {
 
         $directory = 'objects/' . $this->getResource()->getItemID();
+
+        // Проверяем существует ли каталог
+        if (!Storage::exists($directory)) {
+            // Если нет, создаем его
+            Storage::makeDirectory($directory);
+        }
+
+        return $directory;
+
+    }
+
+    public function cloudDirectory(): string
+    {
+
+        $directory = 'objects_cloud/' . $this->getResource()->getItemID();
 
         // Проверяем существует ли каталог
         if (!Storage::exists($directory)) {
