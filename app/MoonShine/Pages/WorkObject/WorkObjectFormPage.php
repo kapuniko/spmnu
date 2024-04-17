@@ -59,6 +59,7 @@ class WorkObjectFormPage extends FormPage
                                     ->selectMode(),
                                 BelongsTo::make('contragent', resource: new ContragentResource())
                                     ->nullable()
+                                    ->searchable()
                                     ->translatable('moonshine::workObject'),
                                 Text::make('address')->translatable('moonshine::workObject')
                             ]),
