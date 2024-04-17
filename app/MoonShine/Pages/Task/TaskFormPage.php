@@ -49,6 +49,7 @@ class TaskFormPage extends FormPage
                             ->translatable('moonshine::task'),
                         BelongsTo::make('workObject', 'workObject', 'name', resource: new WorkObjectResource())
                             ->nullable()
+                            ->searchable()
                             ->translatable('moonshine::task')
                     ]),
                     LineBreak::make(),

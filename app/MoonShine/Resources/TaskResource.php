@@ -156,6 +156,30 @@ class TaskResource extends ModelResource
         return $item;
     }
 
+    protected function afterCreated(Model $item): Model
+    {
+        $taskId = $item->id; // Ваш ID задачи
+        $taskName = $item->name;
+        $creatorId = $item->creator; // создатель задачи
+        $performerId = $item->performer;
+
+		if($creatorId != $performerId){
+            $textMessage = 'У вас новая задача: ' . $taskName;
+
+            MoonShineNotification::send(
+                message: $textMessage,
+                // Опционально button
+                button: ['link' => 'https://crm.spmnu.kz/crm/resource/task-resource/task-detail-page?resourceItem='.$taskId, 'label' => 'Посмотеть'],
+                // Опционально id администраторов (по умолчанию всем)
+                ids: [$performerId],
+                // Опционально цвет иконки (purple, pink, blue, green, yellow, red, gray)
+                color: 'purple'
+            );
+        }
+
+        return $item;
+    }
+
     public function trAttributes(): Closure
     {
         return function (Model $item, int $row, ComponentAttributeBag $attr): ComponentAttributeBag
