@@ -7,6 +7,7 @@ namespace App\MoonShine\Pages\Task;
 use App\Enums\TaskStatus;
 use App\MoonShine\Pages\HasAktauTime;
 use App\MoonShine\Resources\WorkObjectResource;
+use Illuminate\Database\Eloquent\Model;
 use MoonShine\Decorations\Block;
 use MoonShine\Decorations\Column;
 use MoonShine\Decorations\Grid;
@@ -24,6 +25,7 @@ use MoonShine\Resources\MoonShineUserResource;
 class TaskFormPage extends FormPage
 {
     use HasAktauTime;
+
     public function fields(): array
     {
         return [
@@ -32,12 +34,13 @@ class TaskFormPage extends FormPage
                     Block::make([
                         Text::make('name')->required()->translatable('moonshine::task'),
                         TinyMce::make('description')
-                        ->translatable('moonshine::task'),
+                        ->translatable('moonshine::task')
                     ])
                 ])->columnSpan(8),
                 Column::make([
                     Block::make([
-                        Hidden::make($this->whoIsPage())->fill( auth('moonshine')->id()),
+                        Hidden::make('creator')->default( strval(auth('moonshine')->id()) ),
+                        Hidden::make('updater')->setValue( strval(auth('moonshine')->id()) ),
                         Date::make('date_created')->withTime()->default($this->AktauTime())
                             ->required()->translatable('moonshine::task'),
                         BelongsTo::make('Performer', 'performerUser', resource: new MoonShineUserResource())

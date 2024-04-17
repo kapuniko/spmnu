@@ -12,7 +12,6 @@ use MoonShine\Buttons\DeleteButton;
 use MoonShine\Buttons\DetailButton;
 use MoonShine\Buttons\EditButton;
 use MoonShine\Buttons\MassDeleteButton;
-use MoonShine\Components\ActionGroup;
 use MoonShine\Decorations\Column;
 use MoonShine\Decorations\Grid;
 use MoonShine\Decorations\LineBreak;

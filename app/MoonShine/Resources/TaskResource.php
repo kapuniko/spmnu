@@ -23,7 +23,7 @@ use MoonShine\Fields\DateRange;
 use MoonShine\Fields\Enum;
 use MoonShine\Handlers\ExportHandler;
 use MoonShine\Handlers\ImportHandler;
-use MoonShine\Metrics\ValueMetric;
+use MoonShine\Notifications\MoonShineNotification;
 use MoonShine\Resources\ModelResource;
 use Closure;
 
@@ -125,6 +125,8 @@ class TaskResource extends ModelResource
     protected function afterUpdated(Model $item): Model
     {
         $taskId = $this->getItemID(); // Ваш ID задачи
+        $taskName = $item->name;
+        $creatorId = $item->creator; // создатель задачи
         $status = $item->status; // Новый статус
         $userId = auth()->id(); // ID пользователя
         $dateTime = $this->AktauTimeToBase(); // Текущее время
@@ -136,6 +138,20 @@ class TaskResource extends ModelResource
             'date_time' => $dateTime,
             // Добавьте другие поля, если необходимо
         ]);
+
+        if($status == 'done'){
+            $textMessage = 'Задача: ' . $taskName . ' — выполнена';
+
+            MoonShineNotification::send(
+                message: $textMessage,
+                // Опционально button
+                button: ['link' => 'https://crm.spmnu.kz/crm/resource/task-resource/task-detail-page?resourceItem='.$taskId, 'label' => 'Посмотеть задачу'],
+                // Опционально id администраторов (по умолчанию всем)
+                ids: [$creatorId],
+                // Опционально цвет иконки (purple, pink, blue, green, yellow, red, gray)
+                color: 'green'
+            );
+        };
 
         return $item;
     }
