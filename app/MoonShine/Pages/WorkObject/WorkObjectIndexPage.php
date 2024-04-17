@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Pages\WorkObject;
 
-use MoonShine\Fields\ID;
 use MoonShine\Fields\Image;
 use MoonShine\Fields\Relationships\BelongsToMany;
 use MoonShine\Fields\Text;

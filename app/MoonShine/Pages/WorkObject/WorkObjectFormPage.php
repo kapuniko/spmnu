@@ -95,7 +95,7 @@ class WorkObjectFormPage extends FormPage
                     LineBreak::make(),
                     Block::make([
                         File::make('files')
-                            ->dir( $this->filesDirectory() )
+                            ->dir( $this->cloudDirectory() )
                             ->multiple()
                             ->keepOriginalFileName()
                             ->removable()

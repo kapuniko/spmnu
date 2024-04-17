@@ -31,11 +31,6 @@ class Task extends Model
         return $this->belongsTo(MoonshineUser::class, 'performer', 'id');
     }
 
-    public function updaterUser(): BelongsTo
-    {
-        return $this->belongsTo(MoonshineUser::class, 'updater', 'id');
-    }
-
     public function workObject(): BelongsTo
     {
         return $this->belongsTo(WorkObject::class);
