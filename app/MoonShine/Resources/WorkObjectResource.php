@@ -16,6 +16,8 @@ use MoonShine\Buttons\DetailButton;
 use MoonShine\Buttons\EditButton;
 use MoonShine\Buttons\MassDeleteButton;
 use MoonShine\Enums\ClickAction;
+use MoonShine\Handlers\ExportHandler;
+use MoonShine\Handlers\ImportHandler;
 use MoonShine\Resources\ModelResource;
 
 /**
@@ -69,16 +71,32 @@ class WorkObjectResource extends ModelResource
 
     public function query(): Builder
     {
-        $userId = auth()->id();
 
-        return parent::query()
-            ->where(function ($query) use ($userId) {
-                $query->where('creator', $userId)
-                    ->orWhere('performer', $userId);
-            })
-            ->orWhereHas('members_id', function ($query) use ($userId) {
-                $query->where('moonshine_user_id', $userId);
-            });
+        if(auth()->user()->moonshine_user_role_id === 2){
+            return parent::query();
+        } else {
+            $userId = auth()->id();
+
+            return parent::query()
+                ->where(function ($query) use ($userId) {
+                    $query->where('creator', $userId)
+                        ->orWhere('performer', $userId);
+                })
+                ->orWhereHas('members_id', function ($query) use ($userId) {
+                    $query->where('moonshine_user_id', $userId);
+                });
+        }
+
+    }
+
+    public function import(): ?ImportHandler
+    {
+        return null;
+    }
+
+    public function export(): ?ExportHandler
+    {
+        return null;
     }
 
 }

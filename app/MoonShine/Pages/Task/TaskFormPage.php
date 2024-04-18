@@ -7,7 +7,6 @@ namespace App\MoonShine\Pages\Task;
 use App\Enums\TaskStatus;
 use App\MoonShine\Pages\HasAktauTime;
 use App\MoonShine\Resources\WorkObjectResource;
-use Illuminate\Database\Eloquent\Model;
 use MoonShine\Decorations\Block;
 use MoonShine\Decorations\Column;
 use MoonShine\Decorations\Grid;
@@ -84,15 +83,4 @@ class TaskFormPage extends FormPage
         ];
     }
 
-
-    public function whoIsPage(): string
-    {
-        if ($this->getResource()->getItem()) {
-            $wip = 'updater';
-        } else {
-            $wip = 'creator';
-        }
-
-        return $wip;
-    }
 }
