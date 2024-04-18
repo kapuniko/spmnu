@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\MoonShine\Pages\Task;
 
 use App\Enums\TaskStatus;
+use App\MoonShine\Resources\WorkObjectResource;
 use MoonShine\Decorations\Column;
 use MoonShine\Decorations\Grid;
 use MoonShine\Fields\Date;
@@ -27,6 +28,8 @@ class TaskDetailPage extends DetailPage
             Date::make('date_created')->format('d M Y — H:i')
                 ->translatable('moonshine::task'),
             Date::make('deadline')->format('d M Y — H:i')
+                ->translatable('moonshine::task'),
+            BelongsTo::make('workObject', 'workObject', 'name', resource: new WorkObjectResource())
                 ->translatable('moonshine::task'),
             BelongsTo::make('Creator', 'user', resource: new MoonShineUserResource())
                 ->translatable('moonshine::task'),

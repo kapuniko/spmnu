@@ -15,7 +15,7 @@ class WorkObjectIndexPage extends IndexPage
     public function fields(): array
     {
         return [
-            Text::make('name')->translatable('moonshine::workObject'),
+            Text::make('name')->translatable('moonshine::workObject')->sortable(),
             Image::make('Creator', 'user.avatar')->translatable('moonshine::workObject'),
             Image::make('Perf', 'performer_id.avatar')->translatable('moonshine::workObject'),
             BelongsToMany::make('Members', 'members_id', resource: new MoonShineUserResource())
