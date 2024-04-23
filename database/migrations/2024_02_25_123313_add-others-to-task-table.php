@@ -16,6 +16,7 @@ return new class extends Migration
             $table->bigInteger("updater")->nullable();
             $table->bigInteger("performer")->nullable();
             $table->text("status")->nullable();
+            $table->text("tags")->nullable();
             $table->dateTime('deadline')->nullable();
             $table->bigInteger('notification_id')->nullable();
         });

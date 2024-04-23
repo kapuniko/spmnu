@@ -55,7 +55,8 @@ class TaskFormPage extends FormPage
                     Block::make([
                         Enum::make('status')->attach(TaskStatus::class)->translatable('moonshine::task'),
                         Date::make('deadline')->withTime()->format('d M Y — H:i')
-                            ->translatable('moonshine::task')
+                            ->translatable('moonshine::task'),
+                        Text::make('tags')->tags(),
                     ])
                 ])->columnSpan(4)
             ]),
