@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace App\MoonShine\Pages\Task;
 
 use App\Enums\TaskStatus;
+use MoonShine\Components\Badge;
 use MoonShine\Fields\Date;
 use MoonShine\Fields\Enum;
 use MoonShine\Fields\Field;
 use MoonShine\Fields\Image;
+use MoonShine\Fields\StackFields;
 use MoonShine\Fields\Text;
 use MoonShine\Pages\Crud\IndexPage;
 
@@ -21,7 +23,10 @@ class TaskIndexPage extends IndexPage
             Date::make('date_created')->format('d M H:i')->sortable()
                 ->translatable('moonshine::task')
                 ->badge(),
-            Text::make('name')->translatable('moonshine::task'),
+            StackFields::make('name')->fields([
+                Text::make('name'),
+                Text::make('tags', 'tags'),
+            ])->translatable('moonshine::task'),
             Image::make('Creator', 'user.avatar')->translatable('moonshine::task'),
             Image::make('Perf', 'performerUser.avatar')->translatable('moonshine::task'),
             Date::make('deadline')->format('d M H:i')->sortable()

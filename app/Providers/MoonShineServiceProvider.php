@@ -9,6 +9,7 @@ use App\MoonShine\Resources\ContragentResource;
 use App\MoonShine\Resources\ContragentTypeResource;
 use App\MoonShine\Resources\StatusTrackerResource;
 use App\MoonShine\Resources\TaskResource;
+use App\MoonShine\Resources\TestResource;
 use App\MoonShine\Resources\WorkObjectResource;
 use MoonShine\Menu\MenuDivider;
 use MoonShine\Providers\MoonShineApplicationServiceProvider;
@@ -58,7 +59,10 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
                     ->icon('heroicons.users'),
                 MenuDivider::make(),
                 MenuItem::make('StatusTracker', new StatusTrackerResource() )
-                    ->icon('heroicons.table-cells')
+                    ->icon('heroicons.table-cells'),
+                MenuDivider::make(),
+                MenuItem::make('Test', new TestResource())
+                    ->icon('heroicons.sparkles')
             ])->canSee(fn() => auth()->user()->moonshine_user_role_id === 1),
 
             // MenuItem::make('Documentation', 'https://moonshine-laravel.com')

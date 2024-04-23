@@ -24,7 +24,8 @@ class WorkObject extends Model
         'files',
         'contract_files',
         'project_files',
-        'photos'
+        'photos',
+        'chat'
     ];
 
 
@@ -32,7 +33,8 @@ class WorkObject extends Model
         'files' => 'array', // указываем, что поле 'files' должно быть преобразовано в массив
         'contract_files' => 'array',
         'project_files' => 'array',
-        'photos' => 'array'
+        'photos' => 'array',
+        'chat' => 'array'
     ];
 
     public function user(): BelongsTo

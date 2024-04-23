@@ -18,7 +18,8 @@ class Task extends Model
         'performer',
         'description',
         'status',
-        'deadline'
+        'deadline',
+        'tags'
     ];
 
     public function user(): BelongsTo

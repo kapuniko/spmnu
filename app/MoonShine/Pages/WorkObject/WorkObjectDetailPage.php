@@ -25,7 +25,7 @@ class WorkObjectDetailPage extends DetailPage
                 ->translatable('moonshine::workObject'),
             TinyMce::make('description')->translatable('moonshine::workObject'),
             HasMany::make('tasks', resource: new TaskResource())->creatable()
-                ->translatable('moonshine::workObject')
+                ->translatable('moonshine::workObject'),
         ];
     }
 

@@ -9,7 +9,7 @@ return [
     'deadline' => 'Соңғы мерзім',
     'Creator' => 'Жасау',
     'Performer' => 'Жауапты',
-    'Pref' => 'Жау.',
+    'Perf' => 'Жау.',
     'workObject' => 'Нысан',
     'contragent' => 'Мердігер',
     'address' => 'Нысан мекенжайы',

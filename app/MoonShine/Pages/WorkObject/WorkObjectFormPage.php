@@ -40,8 +40,9 @@ class WorkObjectFormPage extends FormPage
                         Column::make([
                             Block::make([
                                 Text::make('name')->required()->translatable('moonshine::workObject'),
-                                TinyMce::make('description')->translatable('moonshine::workObject'),
-                            ])
+                                TinyMce::make('description')
+                                    ->translatable('moonshine::workObject'),
+                            ]),
                         ])->columnSpan(8),
                         Column::make([
                             Block::make([
@@ -171,6 +172,15 @@ class WorkObjectFormPage extends FormPage
         return [
             ...parent::bottomLayer()
         ];
+    }
+
+
+    public function getMoonshineUserInfo($id): array
+    {
+        // Находим пользователя по переданному ID
+        $user = MoonshineUser::find($id);
+
+        return $user->toArray();
     }
 
 }
