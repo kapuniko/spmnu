@@ -16,6 +16,7 @@ return new class extends Migration
             $table->timestamp('date_created');
             $table->string('name');
             $table->bigInteger('creator');
+            $table->boolean('is_archived')->default('false');
             $table->timestamps();
         });
     }

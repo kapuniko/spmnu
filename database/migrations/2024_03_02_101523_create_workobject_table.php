@@ -27,6 +27,7 @@ return new class extends Migration
             $table->json('contract_files')->nullable();
             $table->json('project_files')->nullable();
             $table->json('chat')->nullable();
+            $table->boolean('is_archived')->default('false');
             $table->timestamps();
         });
     }

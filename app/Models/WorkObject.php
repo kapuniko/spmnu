@@ -25,7 +25,8 @@ class WorkObject extends Model
         'contract_files',
         'project_files',
         'photos',
-        'chat'
+        'chat',
+        'is_archived'
     ];
 
 
@@ -36,6 +37,19 @@ class WorkObject extends Model
         'photos' => 'array',
         'chat' => 'array'
     ];
+
+    public static function boot(): void
+    {
+        parent::boot();
+
+        static::saving(function ($workObject) {
+            // Проверяем, изменилось ли значение поля is_archived
+            if ($workObject->isDirty('is_archived')) {
+                // Получаем все связанные задачи и обновляем их is_archived на то же значение
+                $workObject->tasks()->update(['is_archived' => $workObject->is_archived]);
+            }
+        });
+    }
 
     public function user(): BelongsTo
     {

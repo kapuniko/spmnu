@@ -10,5 +10,7 @@ return [
     'Creator' => 'Creator',
     'Performer' => 'Performer',
     'Perf' => 'Perf.',
-    'workObject' => 'Object'
+    'workObject' => 'Object',
+    'Active_tasks' => 'Active tasks',
+    'Archived_tasks' => 'Archive',
 ];

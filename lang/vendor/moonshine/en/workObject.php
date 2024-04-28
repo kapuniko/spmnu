@@ -21,4 +21,6 @@ return [
     'object_info' => 'Object info',
     'object_files' => 'Documents',
     'object_photo' => 'Object photos',
+    'Active_WorkObjects' => 'Active Objects',
+    'Archived_WorkObjects' => 'Archive',
 ];
