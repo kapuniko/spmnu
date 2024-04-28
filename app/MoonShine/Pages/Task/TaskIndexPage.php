@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\MoonShine\Pages\Task;
 
 use App\Enums\TaskStatus;
-use MoonShine\Components\Badge;
 use MoonShine\Fields\Date;
 use MoonShine\Fields\Enum;
 use MoonShine\Fields\Field;
@@ -37,7 +36,6 @@ class TaskIndexPage extends IndexPage
             Enum::make('status')->attach(TaskStatus::class)
                 ->sortable()
                 ->translatable('moonshine::task')
-
         ];
     }
 

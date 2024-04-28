@@ -19,7 +19,8 @@ class Task extends Model
         'description',
         'status',
         'deadline',
-        'tags'
+        'tags',
+        'is_archived'
     ];
 
     public function user(): BelongsTo

@@ -21,4 +21,7 @@ return [
     'object_info' => 'Нысан туралы ақпарат',
     'object_files' => 'Құжаттар',
     'object_photo' => 'Нысан фотосуреттері',
+    'Active_WorkObjects' => 'Белсенді нысандар',
+    'Archived_WorkObjects' => 'Архивтегі нысандар',
+
 ];

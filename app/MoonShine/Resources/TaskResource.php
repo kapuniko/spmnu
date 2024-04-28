@@ -14,6 +14,7 @@ use App\MoonShine\Pages\Task\TaskFormPage;
 use App\MoonShine\Pages\Task\TaskDetailPage;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\ComponentAttributeBag;
+use MoonShine\ActionButtons\ActionButton;
 use MoonShine\Buttons\DeleteButton;
 use MoonShine\Buttons\DetailButton;
 use MoonShine\Buttons\EditButton;
@@ -23,7 +24,10 @@ use MoonShine\Fields\DateRange;
 use MoonShine\Fields\Enum;
 use MoonShine\Handlers\ExportHandler;
 use MoonShine\Handlers\ImportHandler;
+use MoonShine\MoonShineRequest;
+use MoonShine\MoonShineUI;
 use MoonShine\Notifications\MoonShineNotification;
+use MoonShine\QueryTags\QueryTag;
 use MoonShine\Resources\ModelResource;
 use Closure;
 
@@ -68,11 +72,38 @@ class TaskResource extends ModelResource
     {
         return [
             ...$this->getIndexButtons(),
-            DetailButton::for($this)->showInDropdown()->customAttributes(['class' => 'btn', 'style' => 'display:flex']),
-            EditButton::for($this)->showInDropdown()->primary()->customAttributes(['class' => 'btn', 'style' => 'display:flex']),
+            DetailButton::for($this)->showInDropdown()->customAttributes(['class' => 'btn', 'style' => 'display:flex;width:42px;margin-bottom:5px']),
+            EditButton::for($this)->showInDropdown()->primary()->customAttributes(['class' => 'btn', 'style' => 'display:flex;width:42px;margin-bottom:5px']),
+            ActionButton::make('')
+                ->icon('heroicons.outline.archive-box-arrow-down')
+                ->showInDropdown()
+                ->customAttributes(['class' => 'btn', 'style' => 'display:flex;width:42px;margin-bottom:5px'])
+                ->secondary()
+                ->method('archiveTask'),
             DeleteButton::for($this)->showInDropdown(),
             MassDeleteButton::for($this)->showInDropdown(),
         ];
+    }
+
+    public function archiveTask(MoonShineRequest $request)
+    {
+        $archiveTaskItem = $request->getResource()->getItem();
+        $message = 'This ' . $archiveTaskItem->name;
+        MoonShineUI::toast($message, 'success');
+
+        if($archiveTaskItem->is_archived == false){
+            DB::table('tasks')
+                ->where('id', $archiveTaskItem->id)
+                ->update(['is_archived' => true]);
+        } else {
+            DB::table('tasks')
+                ->where('id', $archiveTaskItem->id)
+                ->update(['is_archived' => false]);
+        }
+
+
+
+        return back();
     }
 
     public function filters(): array
@@ -113,6 +144,7 @@ class TaskResource extends ModelResource
     public function countWorkingItems(): Builder
     {
         return $this->query()
+            ->where('is_archived', false)
             ->whereIn('status', ['new', 'at work']);
     }
 
@@ -192,5 +224,19 @@ class TaskResource extends ModelResource
 
             return $attr;
         };
+    }
+
+    public function queryTags(): array
+    {
+        return [
+            QueryTag::make(
+                'Active_tasks',
+                static fn(Builder $query) => $query->where('is_archived', false)
+            )->icon('heroicons.outline.table-cells')->translatable('moonshine::task')->default(),
+            QueryTag::make(
+                'Archived_tasks', // Tag Title
+                static fn(Builder $query) => $query->where('is_archived', true) // Query builder
+            )->icon('heroicons.outline.archive-box')->translatable('moonshine::task')
+        ];
     }
 }

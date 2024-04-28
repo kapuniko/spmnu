@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Pages\WorkObject;
 
+use MoonShine\Fields\Checkbox;
 use MoonShine\Fields\Image;
 use MoonShine\Fields\Relationships\BelongsToMany;
 use MoonShine\Fields\Text;
@@ -20,7 +21,7 @@ class WorkObjectIndexPage extends IndexPage
             Image::make('Perf', 'performer_id.avatar')->translatable('moonshine::workObject'),
             BelongsToMany::make('Members', 'members_id', resource: new MoonShineUserResource())
                 ->translatable('moonshine::workObject')
-                ->inLine(separator: ' ', badge: true)
+                ->inLine(separator: ' ', badge: true),
         ];
     }
 

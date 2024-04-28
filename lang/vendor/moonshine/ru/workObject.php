@@ -21,4 +21,6 @@ return [
     'object_info' => 'Информация по объекту',
     'object_files' => 'Документы',
     'object_photo' => 'Фотографии объекта',
+    'Active_WorkObjects' => 'Активные объекты',
+    'Archived_WorkObjects' => 'Объекты в архиве',
 ];
