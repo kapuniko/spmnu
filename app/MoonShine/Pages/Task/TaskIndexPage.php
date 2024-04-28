@@ -25,7 +25,9 @@ class TaskIndexPage extends IndexPage
                 ->badge(),
             StackFields::make('name')->fields([
                 Text::make('name'),
-                Text::make('tags', 'tags'),
+                Text::make('tags',
+                    'tags',
+                    fn($item) => $item->tags ? $this->showTags($item->tags) : ''),
             ])->translatable('moonshine::task'),
             Image::make('Creator', 'user.avatar')->translatable('moonshine::task'),
             Image::make('Perf', 'performerUser.avatar')->translatable('moonshine::task'),
@@ -80,6 +82,20 @@ class TaskIndexPage extends IndexPage
         }
 
         return $color;
+    }
+
+    public function showTags($tagsStr): string
+    {
+
+        $tagsArr = explode(",", $tagsStr);
+
+        $tagsResult = '';
+
+        foreach ($tagsArr as $tag) {
+            $tagsResult .= '<span class="badge badge-purple">' . $tag . '</span> ';
+        }
+
+        return $tagsResult;
     }
 
 }

@@ -85,7 +85,7 @@ class TaskResource extends ModelResource
 
     public function search(): array
     {
-        return ['id', 'name'];
+        return ['id', 'name', 'tags'];
     }
 
     public function import(): ?ImportHandler
