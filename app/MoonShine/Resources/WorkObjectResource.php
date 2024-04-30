@@ -133,11 +133,18 @@ class WorkObjectResource extends ModelResource
             QueryTag::make(
                 'Active_WorkObjects',
                 static fn(Builder $query) => $query->where('is_archived', false)
-            )->icon('heroicons.outline.table-cells')->translatable('moonshine::workObject')->default(),
+            )
+                ->icon('heroicons.outline.table-cells')
+                ->translatable('moonshine::workObject')
+                ->default()
+                ->alias('active-work-objects'),
             QueryTag::make(
                 'Archived_WorkObjects', // Tag Title
                 static fn(Builder $query) => $query->where('is_archived', true)
-            )->icon('heroicons.outline.archive-box')->translatable('moonshine::workObject')
+            )
+                ->icon('heroicons.outline.archive-box')
+                ->translatable('moonshine::workObject')
+                ->alias('archived-work-objects')
         ];
     }
 

@@ -232,11 +232,18 @@ class TaskResource extends ModelResource
             QueryTag::make(
                 'Active_tasks',
                 static fn(Builder $query) => $query->where('is_archived', false)
-            )->icon('heroicons.outline.table-cells')->translatable('moonshine::task')->default(),
+            )
+                ->icon('heroicons.outline.table-cells')
+                ->translatable('moonshine::task')
+                ->default()
+                ->alias('active-tasks'),
             QueryTag::make(
                 'Archived_tasks', // Tag Title
                 static fn(Builder $query) => $query->where('is_archived', true) // Query builder
-            )->icon('heroicons.outline.archive-box')->translatable('moonshine::task')
+            )
+                ->icon('heroicons.outline.archive-box')
+                ->translatable('moonshine::task')
+                ->alias('archived-tasks')
         ];
     }
 }
