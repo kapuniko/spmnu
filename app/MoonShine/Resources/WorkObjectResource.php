@@ -122,6 +122,11 @@ class WorkObjectResource extends ModelResource
         return null;
     }
 
+    public function search(): array
+    {
+        return ['id', 'name', 'address', 'contragent.name'];
+    }
+
     public function queryTags(): array
     {
         return [
