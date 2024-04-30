@@ -16,6 +16,7 @@ use MoonShine\Fields\Date;
 use MoonShine\Fields\File;
 use MoonShine\Fields\Hidden;
 use MoonShine\Fields\Image;
+use MoonShine\Fields\Preview;
 use MoonShine\Fields\Relationships\BelongsTo;
 use MoonShine\Fields\Relationships\BelongsToMany;
 use MoonShine\Fields\Text;
@@ -76,6 +77,8 @@ class WorkObjectFormPage extends FormPage
                 ])->translatable('moonshine::workObject')->icon('heroicons.outline.information-circle'),
                 Tab::make('object_files',[
                     Block::make([
+                        Preview::make('Сохраните Объект', '', fn() => $this->warningFileTab())
+                            ->badge('yellow')->hideOnUpdate(),
                         File::make('contract_files')
                             ->dir( $this->filesDirectory() )
                             ->multiple()
@@ -83,6 +86,7 @@ class WorkObjectFormPage extends FormPage
                             ->removable()
                             ->disableDeleteFiles()
                             ->translatable('moonshine::workObject')
+                            ->hideOnCreate(),
                     ]),
                     LineBreak::make(),
                     Block::make([
@@ -93,6 +97,7 @@ class WorkObjectFormPage extends FormPage
                             ->removable()
                             ->disableDeleteFiles()
                             ->translatable('moonshine::workObject')
+                            ->hideOnCreate()
                     ]),
                     LineBreak::make(),
                     Block::make([
@@ -103,10 +108,13 @@ class WorkObjectFormPage extends FormPage
                             ->removable()
                             ->disableDeleteFiles()
                             ->translatable('moonshine::workObject')
+                            ->hideOnCreate()
                     ])
                 ])->translatable('moonshine::workObject')->icon('heroicons.outline.document-text'),
                 Tab::make('object_photo', [
                     Block::make([
+                        Preview::make('Сохраните Объект', '', fn() => $this->warningFileTab())
+                            ->badge('warning')->hideOnUpdate(),
                         Image::make('object_photo','photos')
                             ->dir( $this->cloudDirectory() )
                             ->multiple()
@@ -114,6 +122,7 @@ class WorkObjectFormPage extends FormPage
                             ->removable()
                             ->disableDeleteFiles()
                             ->translatable('moonshine::workObject')
+                            ->hideOnCreate()
                     ])
                 ])->translatable('moonshine::workObject')->icon('heroicons.outline.photo')
             ]),
@@ -181,6 +190,11 @@ class WorkObjectFormPage extends FormPage
         $user = MoonshineUser::find($id);
 
         return $user->toArray();
+    }
+
+    public function warningFileTab(): string
+    {
+        return 'Загрузка файлов будет доступна после того, как вы сохраните этот объект.';
     }
 
 }
