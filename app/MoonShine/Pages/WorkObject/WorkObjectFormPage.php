@@ -114,7 +114,7 @@ class WorkObjectFormPage extends FormPage
                 Tab::make('object_photo', [
                     Block::make([
                         Preview::make('Сохраните Объект', '', fn() => $this->warningFileTab())
-                            ->badge('warning')->hideOnUpdate(),
+                            ->badge('yellow')->hideOnUpdate(),
                         Image::make('object_photo','photos')
                             ->dir( $this->cloudDirectory() )
                             ->multiple()

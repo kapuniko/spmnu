@@ -5,17 +5,16 @@ declare(strict_types=1);
 namespace App\MoonShine\Pages\Contragent;
 
 use App\MoonShine\Resources\ContragentPersonResource;
-use App\MoonShine\Resources\ContragentTypeResource;
-use App\MoonShine\Resources\TaskResource;
 use MoonShine\Decorations\Block;
 use MoonShine\Decorations\Column;
+use MoonShine\Decorations\Flex;
 use MoonShine\Decorations\Grid;
 use MoonShine\Decorations\LineBreak;
 use MoonShine\Decorations\Tab;
 use MoonShine\Decorations\Tabs;
 use MoonShine\Fields\Email;
-use MoonShine\Fields\ID;
 use MoonShine\Fields\Phone;
+use MoonShine\Fields\Preview;
 use MoonShine\Fields\Relationships\BelongsTo;
 use MoonShine\Fields\Relationships\HasMany;
 use MoonShine\Fields\Text;
@@ -57,21 +56,21 @@ class ContragentFormPage extends FormPage
                 ])->translatable('moonshine::contragent'),
                 Tab::make('requisites', [
                     Block::make('requisites',[
-                        Grid::make([
-                            Column::make([ Text::make('iin')->translatable('moonshine::contragent') ])
-                                ->columnSpan(6),
-                            Column::make([ Text::make('rnn')->translatable('moonshine::contragent') ])
-                                ->columnSpan(6),
+                        Flex::make([
+                            Text::make('iin')->translatable('moonshine::contragent')
+                                ->showWhen('contragent_type_id', 'in', ['1','2']),
+                            Text::make('rnn')->translatable('moonshine::contragent'),
+                            Text::make('bin')->translatable('moonshine::contragent')
                         ]),
                         LineBreak::make(),
                         Grid::make([
-                            Column::make([ Text::make('bin')->translatable('moonshine::contragent') ])
-                                ->columnSpan(6),
-                            Column::make([ Text::make('gos_reg')->translatable('moonshine::contragent') ])
-                                ->columnSpan(6),
-                        ]),
-                        LineBreak::make(),
-                        Textarea::make('bank_detail')->translatable('moonshine::contragent'),
+                            Column::make([
+                                Text::make('gos_reg')->translatable('moonshine::contragent'),
+                            ])->columnSpan(6),
+                            Column::make([
+                                Textarea::make('bank_detail')->translatable('moonshine::contragent'),
+                            ])->columnSpan(6),
+                        ])
                     ])->translatable('moonshine::contragent'),
                 ])->translatable('moonshine::contragent'),
                 Tab::make('description', [
@@ -80,9 +79,16 @@ class ContragentFormPage extends FormPage
             ]),
             HasMany::make('person','person', resource: new ContragentPersonResource())
                 ->creatable()
-                ->translatable('moonshine::contragent')
+                ->translatable('moonshine::contragent'),
+            Preview::make('Сотрудники', '', fn() => $this->warningContragentTab())
+                ->badge('yellow')->hideOnUpdate(),
 
         ];
+    }
+
+    public function warningContragentTab(): string
+    {
+        return 'Добавление сотрудников станет доступно после сохранения.';
     }
 
     protected function topLayer(): array
